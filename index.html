@@ -121,7 +121,6 @@ section{padding:72px 22px}
 .scroll-hint{position:absolute;bottom:30px;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.25);font-size:10px;letter-spacing:.2em}
 .scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,rgba(91,158,201,0.5),transparent);animation:ln 2s infinite}
 @keyframes ln{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-#concept{background:var(--white)}
 .cpt-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:480px;margin:0 auto}
 .cpt-card{background:var(--frost);border:1px solid var(--border);border-radius:var(--r);padding:26px 16px;text-align:center;transition:transform .2s}
 .cpt-card:hover{transform:translateY(-3px)}
@@ -130,11 +129,10 @@ section{padding:72px 22px}
 .cpt-card p{font-size:12px;color:var(--muted);line-height:1.7}
 .cpt-msg{margin-top:28px;max-width:480px;margin-left:auto;margin-right:auto;background:var(--frost);border:1px solid var(--border);border-left:3px solid var(--mid);border-radius:0 var(--r) var(--r) 0;padding:28px 24px}
 .cpt-msg p{font-size:14px;line-height:2.4;color:var(--text)}
-#cast{background:var(--frost)}
 .cast-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:480px;margin:0 auto}
 .cast-card{background:#fff;border-radius:var(--r);border:1px solid var(--border);overflow:hidden;transition:transform .2s,box-shadow .2s}
 .cast-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(30,58,82,0.1)}
-.cast-photo{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,var(--navy) 0%,var(--blue) 60%,var(--mid) 100%);display:flex;align-items:center;justify-content:center;font-size:54px}
+.cast-photo{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,var(--navy) 0%,var(--blue) 60%,var(--mid) 100%);display:flex;align-items:center;justify-content:center;font-size:54px;overflow:hidden}
 .cast-photo img{width:100%;height:100%;object-fit:cover}
 .cast-info{padding:14px 12px}
 .cast-name{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
@@ -142,7 +140,6 @@ section{padding:72px 22px}
 .cast-tags{display:flex;flex-wrap:wrap;gap:4px}
 .cast-tag{font-size:10px;background:var(--pale);color:var(--mid);padding:2px 9px;border-radius:10px}
 .cast-note{text-align:center;margin-top:24px;font-size:12px;color:var(--muted);line-height:2}
-#price{background:var(--white)}
 .price-wrap{max-width:480px;margin:0 auto}
 .price-block{margin-bottom:18px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
 .price-head{background:var(--navy);color:#fff;padding:13px 20px;font-size:13px;font-weight:700;letter-spacing:.12em}
@@ -150,7 +147,6 @@ section{padding:72px 22px}
 .price-row:last-child{border-bottom:none}
 .price-row .amt{font-weight:700;color:var(--navy);font-size:15px}
 .price-note{font-size:11px;color:var(--muted);padding:0 2px}
-#flow{background:var(--frost)}
 .flow-list{max-width:480px;margin:0 auto;display:flex;flex-direction:column}
 .flow-item{display:flex;gap:16px;align-items:flex-start;position:relative}
 .flow-item:not(:last-child)::after{content:'';position:absolute;left:19px;top:42px;width:1px;height:calc(100% - 6px);background:linear-gradient(to bottom,var(--mid),var(--pale))}
@@ -158,11 +154,10 @@ section{padding:72px 22px}
 .flow-body{background:#fff;border:1px solid var(--border);border-radius:var(--r-sm);padding:16px;flex:1;margin-bottom:16px}
 .flow-body h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
 .flow-body p{font-size:12px;color:var(--muted);line-height:1.85}
-#caution{background:var(--white)}
 .cau-block{max-width:480px;margin:0 auto 18px;background:var(--frost);border:1px solid var(--border);border-radius:var(--r);padding:24px}
 .cau-block h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .cau-list li{font-size:13px;color:var(--text);padding:8px 0 8px 18px;border-bottom:1px solid var(--border);position:relative;line-height:1.75}
-.cau-list li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:11px;top:10px}
+.cau-list li::before{content:'\25B8';position:absolute;left:0;color:var(--accent);font-size:11px;top:10px}
 .cau-list li:last-child{border-bottom:none}
 #recruit{background:var(--navy);position:relative;overflow:hidden}
 #recruit .ttl h2{color:#fff}
@@ -181,7 +176,6 @@ section{padding:72px 22px}
 .rec-apply{text-align:center;max-width:480px;margin:0 auto}
 .rec-apply p{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:22px;line-height:2}
 .btn-line-r{display:inline-flex;align-items:center;gap:10px;background:#06C755;color:#fff;padding:17px 44px;border-radius:30px;font-size:15px;font-weight:700}
-#contact{background:var(--frost)}
 .con-box{max-width:480px;margin:0 auto}
 .prv{background:#fff;border:1px solid var(--border);border-radius:var(--r-sm);padding:18px;font-size:12px;color:var(--muted);line-height:2}
 .area-tab{background:var(--frost);border:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;padding:9px 20px;border-radius:20px;cursor:pointer;transition:all .2s;font-family:inherit}
@@ -200,10 +194,30 @@ footer p{font-size:12px;line-height:2}
 @keyframes pulse{0%,100%{box-shadow:0 6px 22px rgba(6,199,85,.45)}50%{box-shadow:0 6px 32px rgba(6,199,85,.7)}}
 section{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 section.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+.adm-sidebar{width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap}
+.adm-logo{padding:14px 16px;flex:1}
+.adm-nav{display:flex;flex-direction:row;flex-wrap:wrap;padding:8px;width:100%;gap:4px}
+.adm-link{padding:8px 12px;font-size:12px;border-left:none;border-bottom:2px solid transparent;border-radius:8px}
+.adm-link:hover,.adm-link.active{border-left:none;border-bottom-color:var(--accent)}
+.adm-footer{display:none}
+.adm-main{margin-left:0;width:100%}
+.adm-topbar{height:50px;padding:0 16px}
+.adm-content{padding:16px}
+.adm-stats{grid-template-columns:repeat(3,1fr);gap:8px}
+.adm-stat{padding:12px}
+.adm-stat-num{font-size:22px}
+.adm-form-grid{grid-template-columns:1fr}
+.adm-modal{max-height:95vh}
+.adm-cast-item{flex-wrap:wrap}
+.adm-layout{flex-direction:column}
+#adminPanel{overflow-y:auto}
+.adm-back-btn{display:block!important}
+}
 </style>
 </head>
 <body>
-
 <div id="adminLogin">
   <div class="login-box">
     <div class="login-logo">BLOOM</div>
@@ -213,7 +227,6 @@ section.visible{opacity:1;transform:translateY(0)}
     <div class="login-err" id="loginErr">パスワードが違います</div>
   </div>
 </div>
-
 <div id="adminPanel">
 <div class="adm-layout">
 <aside class="adm-sidebar">
@@ -224,9 +237,8 @@ section.visible{opacity:1;transform:translateY(0)}
     <div class="adm-link" onclick="admPage('diary',this)"><span>📝</span> 写メ日記</div>
     <div class="adm-link" onclick="admPage('ranking',this)"><span>🏆</span> ランキング</div>
     <div class="adm-link" onclick="admPage('review',this)"><span>⭐</span> 口コミ管理</div>
-    <div class="adm-link" onclick="admPage('settings',this)"><span>⚙️</span> 設定</div>
   </nav>
-  <div class="adm-footer"><a onclick="closeAdmin()" style="cursor:pointer;color:rgba(255,255,255,.35);font-size:12px">← サイトに戻る</a></div>
+  <div class="adm-footer"><a onclick="closeAdmin()" style="cursor:pointer;color:rgba(255,255,255,.35);font-size:12px">← サイトに戻る</a></div><a class="adm-back-btn" onclick="closeAdmin()" style="display:none;cursor:pointer;color:rgba(255,255,255,.5);font-size:12px;padding:8px 12px">← 戻る</a>
 </aside>
 <div class="adm-main">
   <div class="adm-topbar"><div class="adm-title" id="admTitle">ダッシュボード</div></div>
@@ -268,32 +280,24 @@ section.visible{opacity:1;transform:translateY(0)}
         <div id="reviewAdminList" class="adm-review-list"></div>
       </div></div>
     </div>
-    <div class="adm-page" id="adm-settings">
-      <div class="adm-card"><div class="adm-card-head"><h2>⚙️ 設定</h2></div><div class="adm-card-body" style="font-size:13px;color:var(--muted);line-height:2">パスワード変更はコードの ADMIN_PW を直接変更してください。</div></div>
-    </div>
   </div>
 </div>
 </div>
 </div>
-
 <div class="adm-modal-bg" id="castModal">
   <div class="adm-modal">
     <div class="adm-modal-head"><h3 id="cmTitle">キャストを追加</h3><button class="adm-modal-close" onclick="closeCM()">✕</button></div>
     <div class="adm-modal-body">
       <div class="adm-form-row"><label>写真</label><div class="adm-upload" onclick="document.getElementById('cpInput').click()"><input type="file" id="cpInput" accept="image/*" multiple onchange="handleCP(this)"><div style="font-size:36px;margin-bottom:10px">📷</div><div style="font-size:13px;color:var(--muted)">タップして写真を選ぶ</div></div><div class="adm-preview" id="cpPreview"></div></div>
       <div class="adm-form-grid"><div class="adm-form-row"><label>名前</label><input type="text" id="cName" placeholder="例：りく"></div><div class="adm-form-row"><label>年齢</label><input type="number" id="cAge" placeholder="例：25"></div></div>
-      <div class="adm-form-row"><label>出身地</label><input type="text" id="cFrom" placeholder="例：埼玉"></div>
       <div class="adm-form-row"><label>担当エリア</label><select id="cArea"><option value="tokyo">🟢 東京</option><option value="saitama">🔵 埼玉</option><option value="gunma">🟡 群馬</option></select></div>
-      <div class="adm-form-row"><label>キャッチコピー</label><input type="text" id="cCatch" placeholder="例：あなたを全力で癒します"></div>
-      <div class="adm-form-row"><label>自己紹介</label><textarea id="cBio" placeholder="お客様へのメッセージ"></textarea></div>
-      <div class="adm-form-row"><label>タグ</label><div class="adm-tag-row"><input type="text" id="cTagIn" placeholder="例：穏やか" onkeydown="if(event.key==='Enter'){addTag();event.preventDefault()}"><button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="addTag()">追加</button></div><div class="adm-tags-wrap" id="cTags"></div></div>
+      <div class="adm-form-row"><label>タグ（特徴）</label><div class="adm-tag-row"><input type="text" id="cTagIn" placeholder="例：穏やか" onkeydown="if(event.key==='Enter'){addTag();event.preventDefault()}"><button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="addTag()">追加</button></div><div class="adm-tags-wrap" id="cTags"></div></div>
       <div class="adm-form-row"><label>XアカウントURL</label><input type="text" id="cX" placeholder="例：https://x.com/BLOOM_riku"></div>
       <div class="adm-form-row"><label>公開</label><select id="cStatus"><option value="active">公開中</option><option value="hidden">非公開</option></select></div>
     </div>
     <div class="adm-modal-foot"><button class="adm-btn adm-btn-ghost" onclick="closeCM()">キャンセル</button><button class="adm-btn adm-btn-primary" onclick="saveCast()">保存</button></div>
   </div>
 </div>
-
 <div class="adm-modal-bg" id="diaryModal">
   <div class="adm-modal">
     <div class="adm-modal-head"><h3 id="dmTitle">日記を投稿</h3><button class="adm-modal-close" onclick="closeDM()">✕</button></div>
@@ -306,9 +310,7 @@ section.visible{opacity:1;transform:translateY(0)}
     <div class="adm-modal-foot"><button class="adm-btn adm-btn-ghost" onclick="closeDM()">キャンセル</button><button class="adm-btn adm-btn-primary" onclick="saveDiary()">投稿</button></div>
   </div>
 </div>
-
 <div class="adm-toast" id="admToast"></div>
-
 <div id="site">
 <header>
   <div class="logo"><span class="logo-main">BLOOM</span><span class="logo-sub">女性のための癒しサービス</span></div>
@@ -328,15 +330,14 @@ section.visible{opacity:1;transform:translateY(0)}
   <a href="#flow" onclick="cn()">📋 ご利用の流れ</a>
   <a href="#caution" onclick="cn()">📌 注意事項</a>
   <a href="#monitor" onclick="cn()">🎉 モニター募集</a>
-  <a href="#review" onclick="cn()">⭐ 口コミ</a>
   <a href="#faq" onclick="cn()">❓ よくある質問</a>
+  <a href="#review" onclick="cn()">⭐ 口コミ</a>
   <a href="#contact" onclick="cn()">💬 お問い合わせ</a>
   <div style="margin:12px 20px;height:1px;background:rgba(255,255,255,.08)"></div>
   <a href="#recruit" onclick="cn()" style="color:rgba(100,200,150,.8)">🔷 キャスト募集</a>
 </nav>
 <div class="overlay" id="ov" onclick="cn()"></div>
 <main>
-
 <section id="hero" style="opacity:1;transform:none">
   <div class="hero-ring r1"></div><div class="hero-ring r2"></div><div class="hero-ring r3"></div>
   <div class="hero-eyebrow">男性セラピストによる本格癒しサービス</div>
@@ -350,7 +351,6 @@ section.visible{opacity:1;transform:translateY(0)}
   <a href="https://lin.ee/8peUllI" target="_blank" class="btn-cta">💬 LINEで無料相談・ご予約</a>
   <div class="scroll-hint"><div class="scroll-line"></div><span>scroll</span></div>
 </section>
-
 <section id="concept">
   <div class="ttl"><h2>コンセプト</h2><em>Concept</em></div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;max-width:480px;margin:0 auto 32px">
@@ -366,7 +366,6 @@ section.visible{opacity:1;transform:translateY(0)}
   </div>
   <div class="cpt-msg"><p>BLOOMは、女性のお客様が安心してご利用いただける男性セラピストによる癒しサービスです。<br><br>「誰かに甘えたい」「ただ、ゆっくり癒されたい」<br>そんな気持ちに、真摯にお応えします。<br><br>秘密は必ず守ります。まずはLINEで、お気軽にご相談ください。</p></div>
 </section>
-
 <section id="ranking">
   <div class="ttl"><h2>キャストランキング</h2><em>Ranking</em></div>
   <div style="display:flex;gap:8px;justify-content:center;margin-bottom:28px;flex-wrap:wrap">
@@ -375,10 +374,9 @@ section.visible{opacity:1;transform:translateY(0)}
     <button class="area-tab" onclick="switchRank('saitama',this)">🔵 埼玉</button>
     <button class="area-tab" onclick="switchRank('gunma',this)">🟡 群馬</button>
   </div>
-  <div id="rankingWrap" style="max-width:480px;margin:0 auto"></div>
+  <div id="rankingWrap" style="max-width:480px;margin:0 auto"><p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">読み込み中...</p></div>
   <p class="cast-note" style="margin-top:20px">※ 月間予約数をもとに集計・毎月更新</p>
 </section>
-
 <section id="cast">
   <div class="ttl"><h2>キャスト一覧</h2><em>Cast</em></div>
   <div style="display:flex;gap:8px;justify-content:center;margin-bottom:28px;flex-wrap:wrap">
@@ -390,7 +388,6 @@ section.visible{opacity:1;transform:translateY(0)}
   <div class="cast-grid" id="castGrid"><p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">読み込み中...</p></div>
   <p class="cast-note">※ キャスト情報は随時更新されます。最新情報はLINEにてご確認ください。</p>
 </section>
-
 <section id="firsttime">
   <div class="ttl"><h2>はじめての方へ</h2><em>First Time</em></div>
   <div style="max-width:480px;margin:0 auto">
@@ -404,7 +401,6 @@ section.visible{opacity:1;transform:translateY(0)}
     </div>
   </div>
 </section>
-
 <section id="price">
   <div class="ttl"><h2>料金表</h2><em>Price</em></div>
   <div class="price-wrap">
@@ -440,12 +436,11 @@ section.visible{opacity:1;transform:translateY(0)}
     <p class="price-note">※ 表示価格はすべて税込です。<br>※ 上記エリア外への出張はLINEにてご相談ください。</p>
   </div>
 </section>
-
 <section id="simulation">
   <div class="ttl"><h2>料金シミュレーション</h2><em>Price Simulation</em></div>
   <div style="max-width:480px;margin:0 auto">
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px">📍 エリア</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn active" onclick="setSim('area','tokyo',this)">🟢 東京</button><button class="sim-btn" onclick="setSim('area','saitama',this)">🔵 埼玉</button><button class="sim-btn" onclick="setSim('area','gunma',this)">🟡 群馬</button></div></div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px">🔷 コース</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn active" onclick="setSim('course','basic',this)">基本</button><button class="sim-btn" onclick="setSim('course','泊まり',this)">お泊まり</button><button class="sim-btn" onclick="setSim('course','couple',this)">カップル</button></div></div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px">🔷 コース</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn active" onclick="setSim('course','basic',this)">基本</button><button class="sim-btn" onclick="setSim('course','tomari',this)">お泊まり</button><button class="sim-btn" onclick="setSim('course','couple',this)">カップル</button></div></div>
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px" id="timeBlock"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px">⏱️ 時間</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn active" onclick="setSim('time',90,this)">90分</button><button class="sim-btn" onclick="setSim('time',120,this)">120分</button><button class="sim-btn" onclick="setSim('time',150,this)">150分</button><button class="sim-btn" onclick="setSim('time',180,this)">180分</button></div></div>
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px">⭐ 指名料</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn active" onclick="setSim('shimen',0,this)">なし</button><button class="sim-btn" onclick="setSim('shimen',1100,this)">初指名 ¥1,100</button><button class="sim-btn" onclick="setSim('shimen',2200,this)">本指名 ¥2,200</button></div></div>
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px">➕ 延長</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="sim-btn active" onclick="setSim('encho',0,this)">なし</button><button class="sim-btn" onclick="setSim('encho',8000,this)">30分 ¥8,000</button><button class="sim-btn" onclick="setSim('encho',15000,this)">60分 ¥15,000</button></div></div>
@@ -459,7 +454,6 @@ section.visible{opacity:1;transform:translateY(0)}
     </div>
   </div>
 </section>
-
 <section id="flow">
   <div class="ttl"><h2>ご利用の流れ</h2><em>How to Use</em></div>
   <ol class="flow-list">
@@ -470,41 +464,34 @@ section.visible{opacity:1;transform:translateY(0)}
     <li class="flow-item"><div class="flow-num">05</div><div class="flow-body"><h3>お見送り</h3><p>またのご利用を心よりお待ちしております。</p></div></li>
   </ol>
 </section>
-
 <section id="caution">
-  <div class="ttl"><h2>注意事項・キャンセル規定</h2><em>Caution & Cancellation</em></div>
-  <div class="cau-block"><h3>📌 ご利用にあたっての注意事項</h3><ul class="cau-list"><li>本サービスは18歳以上の女性の方を対象としております</li><li>性的サービスの提供は一切行っておりません</li><li>お客様の個人情報は厳重に管理し、外部への漏洩は一切ございません</li><li>ご予約はLINEより承ります</li><li>お支払いは現金のみとなります</li><li>泥酔状態でのご利用はお断りする場合がございます</li><li>キャストへの暴力・ハラスメント行為は即時退去・以後の利用停止となります</li></ul></div>
+  <div class="ttl"><h2>注意事項・キャンセル規定</h2><em>Caution</em></div>
+  <div class="cau-block"><h3>📌 ご利用にあたっての注意事項</h3><ul class="cau-list"><li>本サービスは18歳以上の女性の方を対象としております</li><li>お客様の個人情報は厳重に管理し、外部への漏洩は一切ございません</li><li>ご予約はLINEより承ります</li><li>お支払いは現金のみとなります</li><li>泥酔状態でのご利用はお断りする場合がございます</li><li>キャストへの暴力・ハラスメント行為は即時退去・以後の利用停止となります</li></ul></div>
   <div class="cau-block"><h3>🗓️ キャンセル規定</h3><ul class="cau-list"><li>前日までのキャンセル：無料</li><li>当日キャンセル：ご利用料金の 50％</li><li>無断キャンセル：ご利用料金の 100％、および今後のご利用停止</li></ul></div>
 </section>
-
 <section id="monitor">
   <div class="ttl"><h2>モニター募集</h2><em>Monitor</em></div>
   <div style="max-width:480px;margin:0 auto">
     <div style="background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);border-radius:var(--r);padding:28px 24px;text-align:center;margin-bottom:20px">
       <div style="font-size:13px;color:var(--accent);letter-spacing:.2em;margin-bottom:8px">🎉 OPEN MEMORIAL</div>
       <div style="font-size:22px;font-weight:800;color:#fff;margin-bottom:6px">オープン記念<br>モニター募集</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px">通常¥16,000 → 特別価格</div>
-      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px;margin-bottom:20px"><div style="font-size:36px;font-weight:800;color:#fff">¥8,000</div><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">90分・交通費込み</div></div>
-      <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:20px">
-        <span style="background:rgba(255,255,255,.1);border:1px solid rgba(91,158,201,.3);color:rgba(255,255,255,.8);font-size:11px;padding:5px 12px;border-radius:20px">🟢 東京　残り5名</span>
-        <span style="background:rgba(255,255,255,.1);border:1px solid rgba(91,158,201,.3);color:rgba(255,255,255,.8);font-size:11px;padding:5px 12px;border-radius:20px">🔵 埼玉　残り5名</span>
-        <span style="background:rgba(255,255,255,.1);border:1px solid rgba(91,158,201,.3);color:rgba(255,255,255,.8);font-size:11px;padding:5px 12px;border-radius:20px">🟡 群馬　残り5名</span>
-      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px">通常¥16,000〜 → 特別価格</div>
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px;margin-bottom:20px"><div style="font-size:36px;font-weight:800;color:#fff">¥10,000</div><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">90分・指名料・交通費込み</div></div>
       <a href="https://lin.ee/8peUllI" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#06C755;color:#fff;padding:14px 32px;border-radius:24px;font-size:14px;font-weight:700">💬 LINEで応募する</a>
-      <div style="margin-top:12px"><a href="https://x.com/bloom_b1" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;padding:12px 28px;border-radius:24px;font-size:13px;font-weight:700">𝕏 公式Xをフォローする</a></div>
-    </div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
-      <div style="background:var(--navy);color:#fff;padding:13px 20px;font-size:13px;font-weight:700">📋 応募条件</div>
-      <div style="padding:4px 0">
-        <div style="display:flex;align-items:flex-start;gap:12px;padding:13px 18px;border-bottom:1px solid var(--border)"><span style="color:var(--accent);font-size:16px;min-width:20px">✓</span><span style="font-size:13px;color:var(--text)">18歳以上の女性の方</span></div>
-        <div style="display:flex;align-items:flex-start;gap:12px;padding:13px 18px;border-bottom:1px solid var(--border)"><span style="color:var(--accent);font-size:16px;min-width:20px">✓</span><span style="font-size:13px;color:var(--text)">サービス終了後にサイトへの口コミ投稿</span></div>
-        <div style="display:flex;align-items:flex-start;gap:12px;padding:13px 18px;border-bottom:1px solid var(--border)"><span style="color:var(--accent);font-size:16px;min-width:20px">✓</span><span style="font-size:13px;color:var(--text)">各エリア5名限定・先着順</span></div>
-        <div style="display:flex;align-items:flex-start;gap:12px;padding:13px 18px"><span style="color:var(--accent);font-size:16px;min-width:20px">✓</span><span style="font-size:13px;color:var(--text)">応募はLINEにて受付</span></div>
-      </div>
     </div>
   </div>
 </section>
-
+<section id="faq">
+  <div class="ttl"><h2>よくある質問</h2><em>FAQ</em></div>
+  <div style="max-width:480px;margin:0 auto">
+    <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden">
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">はじめてでも大丈夫ですか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">もちろんです。ご不安な点はLINEで事前にご相談いただけますので、お気軽にお問い合わせください。</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">どこで施術してもらえますか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">ご自宅・ホテルへキャストが伺います。場所のご手配が難しい場合はご相談ください。</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">個人情報は漏れませんか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">ご連絡いただいた情報はサービス提供のみに使用し、第三者への提供は一切ありません。</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">当日の予約はできますか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">キャストの空き状況によりご対応可能です。お早めにLINEにてご連絡ください。</div></div>
+    </div>
+  </div>
+</section>
 <section id="review">
   <div class="ttl"><h2>口コミ・レビュー</h2><em>Reviews</em></div>
   <div style="max-width:480px;margin:0 auto">
@@ -527,20 +514,6 @@ section.visible{opacity:1;transform:translateY(0)}
     </div>
   </div>
 </section>
-
-<section id="faq">
-  <div class="ttl"><h2>よくある質問</h2><em>FAQ</em></div>
-  <div style="max-width:480px;margin:0 auto">
-    <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden">
-      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">はじめてでも大丈夫ですか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">もちろんです。ご不安な点はLINEで事前にご相談いただけますので、お気軽にお問い合わせください。</div></div>
-      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">どこで施術してもらえますか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">ご自宅・ホテルへキャストが伺います。場所のご手配が難しい場合はご相談ください。</div></div>
-      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">ホテルはどこを使えばいいですか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">ホテルへの出張も承っております。ご利用のホテルが決まっていない場合はLINEにてご相談ください。</div></div>
-      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;border-bottom:1px solid var(--border);background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">個人情報は漏れませんか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">ご連絡いただいた情報はサービス提供のみに使用し、第三者への提供は一切ありません。</div></div>
-      <div class="faq-item" onclick="toggleFaq(this)" style="padding:16px 18px;background:#fff;cursor:pointer"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--navy)">当日の予約はできますか？</div><span class="faq-icon" style="color:var(--accent);font-size:18px">＋</span></div><div class="faq-body" style="display:none;font-size:12px;color:var(--muted);line-height:1.9;margin-top:10px">キャストの空き状況によりご対応可能です。お早めにLINEにてご連絡ください。</div></div>
-    </div>
-  </div>
-</section>
-
 <section id="contact">
   <div class="ttl"><h2>お問い合わせ・ご予約</h2><em>Contact</em></div>
   <div class="con-box">
@@ -553,7 +526,6 @@ section.visible{opacity:1;transform:translateY(0)}
     <div class="prv">🔒 <strong>プライバシーについて</strong><br>ご連絡いただいた情報は、ご予約・サービス提供のみに使用いたします。</div>
   </div>
 </section>
-
 <section id="recruit">
   <div class="ttl"><h2>キャスト募集</h2><em>Recruit</em></div>
   <p class="rec-lead">BLOOMで一緒に働きませんか？<br>未経験・副業・掛け持ちも大歓迎。</p>
@@ -570,14 +542,102 @@ section.visible{opacity:1;transform:translateY(0)}
   </div>
   <div class="rec-apply"><p>まずはLINEでお気軽にご相談ください。</p><a href="https://lin.ee/8peUllI" target="_blank" class="btn-line-r">💬 LINEで応募する</a></div>
 </section>
-
 </main>
 <footer>
   <div class="ft-logo">BLOOM</div>
   <p>ブルーム | 女性のための癒しサービス</p>
   <p>営業エリア：東京（池袋・上野・新宿など）／埼玉（大宮・川口・さいたま市など）／群馬（高崎・前橋など）</p>
   <div class="ft-links">
-    <a href="#concept">コンセプト</a><a href="#ranking">ランキング</a><a href="#cast">キャスト</a><a href="#price">料金表</a><a href="#flow">ご利用の流れ</a><a href="#caution">注意事項</a><a href="#contact">お問い合わせ</a><a href="#recruit" style="color:rgba(100,200,150,.6)">キャスト募集</a>
+    <a href="#concept">コンセプト</a><a href="#cast">キャスト</a><a href="#price">料金表</a><a href="#caution">注意事項</a><a href="#contact">お問い合わせ</a><a href="#recruit" style="color:rgba(100,200,150,.6)">キャスト募集</a>
   </div>
   <div style="display:flex;justify-content:center;gap:16px;margin:16px 0">
-    <a href="https://lin.ee
+    <a href="https://lin.ee/8peUllI" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#06C755;color:#fff;padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700">💬 LINE公式</a>
+    <a href="https://x.com/bloom_b1" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#000;color:#fff;padding:8px 20px;border-radius:20px;font-size:12px;font-weight:700">𝕏 公式X</a>
+  </div>
+  <p class="ft-copy">© 2024 BLOOM. All Rights Reserved.</p>
+</footer>
+<a href="https://lin.ee/8peUllI" target="_blank" class="float-l"><span class="li">💬</span><span>LINE</span></a>
+</div>
+<script>
+const SUPABASE_URL='https://zphfaomajonxxxxdcxww.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwaGZhb21ham9ueHh4eGRjeHd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MDQ0NTIsImV4cCI6MjA5NjM4MDQ1Mn0.9oJOiBrqJItLNvFOI3TlxhkGlGJDO32EdGmtiJAbFb8';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const ADMIN_PW='bloom15';
+function checkAdmin(){if(window.location.hash==='#admin'){document.getElementById('adminLogin').classList.add('show');document.getElementById('site').style.display='none';}}
+window.addEventListener('hashchange',checkAdmin);
+checkAdmin();
+function checkPw(){const pw=document.getElementById('pwInput').value;if(pw===ADMIN_PW){document.getElementById('adminLogin').classList.remove('show');document.getElementById('adminPanel').classList.add('show');document.getElementById('site').style.display='none';updateStats();}else{document.getElementById('loginErr').style.display='block';document.getElementById('pwInput').value='';}}
+function closeAdmin(){document.getElementById('adminPanel').classList.remove('show');document.getElementById('site').style.display='block';window.location.hash='';}
+function admPage(id,el){document.querySelectorAll('.adm-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.adm-link').forEach(l=>l.classList.remove('active'));document.getElementById('adm-'+id).classList.add('active');el.classList.add('active');const titles={dashboard:'ダッシュボード',cast:'キャスト管理',diary:'写メ日記',ranking:'ランキング管理',review:'口コミ管理'};document.getElementById('admTitle').textContent=titles[id]||id;if(id==='cast')loadCasts();if(id==='diary')loadDiaries();if(id==='ranking'){loadRankList();loadRankSelect();}if(id==='review')loadReviewAdmin();if(id==='dashboard')updateStats();}
+async function updateStats(){const[{count:c1},{count:c2},{count:c3}]=await Promise.all([sb.from('casts').select('id',{count:'exact'}).eq('status','active'),sb.from('diaries').select('id',{count:'exact'}),sb.from('reviews').select('id',{count:'exact'}).eq('approved',true)]);document.getElementById('s-cast').textContent=c1||0;document.getElementById('s-diary').textContent=c2||0;document.getElementById('s-review').textContent=c3||0;}
+let editCastId=null,castPhotos=[],castTags=[];
+function fileToB64(f){return new Promise(r=>{const fr=new FileReader();fr.onload=e=>r({name:f.name,dataUrl:e.target.result});fr.readAsDataURL(f);})}
+async function handleCP(inp){const c=await Promise.all(Array.from(inp.files).map(fileToB64));castPhotos=[...castPhotos,...c];renderCPrev();}
+function renderCPrev(){document.getElementById('cpPreview').innerHTML=castPhotos.map((p,i)=>`<div class="adm-prev-item"><img src="${p.dataUrl}"><button class="adm-prev-del" onclick="rmCP(${i})">✕</button></div>`).join('');}
+function rmCP(i){castPhotos.splice(i,1);renderCPrev();}
+function addTag(){const inp=document.getElementById('cTagIn');const v=inp.value.trim();if(!v||castTags.includes(v))return;castTags.push(v);inp.value='';renderTags();}
+function rmTag(i){castTags.splice(i,1);renderTags();}
+function renderTags(){document.getElementById('cTags').innerHTML=castTags.map((t,i)=>`<span class="adm-tag-item">${t}<button class="adm-tag-del" onclick="rmTag(${i})">×</button></span>`).join('');}
+function openCM(id){editCastId=id||null;castPhotos=[];castTags=[];['cName','cAge','cX'].forEach(k=>document.getElementById(k).value='');document.getElementById('cStatus').value='active';document.getElementById('cArea').value='tokyo';document.getElementById('cpPreview').innerHTML='';renderTags();if(id){sb.from('casts').select('*').eq('id',id).single().then(({data:c})=>{if(c){document.getElementById('cmTitle').textContent='キャストを編集';document.getElementById('cName').value=c.name;document.getElementById('cAge').value=c.age||'';document.getElementById('cX').value=c.x_url||'';document.getElementById('cStatus').value=c.status;document.getElementById('cArea').value=c.area||'tokyo';castPhotos=c.photos||[];castTags=c.tags||[];renderCPrev();renderTags();}});}else{document.getElementById('cmTitle').textContent='キャストを追加';}document.getElementById('castModal').classList.add('open');}
+function closeCM(){document.getElementById('castModal').classList.remove('open');}
+async function saveCast(){const name=document.getElementById('cName').value.trim();if(!name){admShowToast('名前を入力してください');return;}const data={name,age:document.getElementById('cAge').value,x_url:document.getElementById('cX').value.trim(),area:document.getElementById('cArea').value,status:document.getElementById('cStatus').value,photos:castPhotos,tags:castTags};if(editCastId){await sb.from('casts').update(data).eq('id',editCastId);}else{data.id=Date.now().toString();await sb.from('casts').insert(data);}admShowToast('保存しました ✓');closeCM();loadCasts();loadRankSelect();}
+async function delCast(id){if(!confirm('削除しますか？'))return;await sb.from('casts').delete().eq('id',id);admShowToast('削除しました');loadCasts();loadRankSelect();}
+async function loadCasts(){const el=document.getElementById('castList');el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">読み込み中...</p>';const{data}=await sb.from('casts').select('*').order('created_at',{ascending:false});if(!data||!data.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">まだキャストが登録されていません</p>';return;}el.innerHTML=data.map(c=>{const thumb=c.photos&&c.photos[0]?`<img src="${c.photos[0].dataUrl}">`:`<span style="font-size:24px">👤</span>`;const areaL={tokyo:'🟢 東京',saitama:'🔵 埼玉',gunma:'🟡 群馬'}[c.area]||'';const st=c.status==='active'?'<span style="font-size:10px;background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:10px;font-weight:700">公開中</span>':'<span style="font-size:10px;background:#FFF3E0;color:#E65100;padding:2px 8px;border-radius:10px;font-weight:700">非公開</span>';return`<div class="adm-cast-item"><div class="adm-cast-thumb">${thumb}</div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--navy)">${c.name} <span style="font-size:11px;font-weight:400;color:var(--muted)">${c.age||''}歳</span></div><div style="margin-top:4px">${st} <span style="margin-left:4px;font-size:12px;color:var(--muted)">${areaL}</span></div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="openCM('${c.id}')">編集</button><button class="adm-btn adm-btn-danger adm-btn-sm" onclick="delCast('${c.id}')">削除</button></div></div>`;}).join('');}
+let editDiaryId=null,diaryPhotos=[];
+async function handleDP(inp){const c=await Promise.all(Array.from(inp.files).map(fileToB64));diaryPhotos=[...diaryPhotos,...c];renderDPrev();}
+function renderDPrev(){document.getElementById('dpPreview').innerHTML=diaryPhotos.map((p,i)=>`<div class="adm-prev-item"><img src="${p.dataUrl}"><button class="adm-prev-del" onclick="rmDP(${i})">✕</button></div>`).join('');}
+function rmDP(i){diaryPhotos.splice(i,1);renderDPrev();}
+async function openDM(id){editDiaryId=id||null;diaryPhotos=[];['dTitle','dBody'].forEach(k=>document.getElementById(k).value='');document.getElementById('dAuthor').value='';document.getElementById('dpPreview').innerHTML='';const{data:casts}=await sb.from('casts').select('name').eq('status','active');const sel=document.getElementById('dAuthor');sel.innerHTML='<option value="">選択してください</option>'+(casts||[]).map(c=>`<option value="${c.name}">${c.name}</option>`).join('');if(id){const{data:d}=await sb.from('diaries').select('*').eq('id',id).single();if(d){document.getElementById('dmTitle').textContent='日記を編集';document.getElementById('dTitle').value=d.title;document.getElementById('dBody').value=d.body;document.getElementById('dAuthor').value=d.author||'';diaryPhotos=d.photos||[];renderDPrev();}}else{document.getElementById('dmTitle').textContent='日記を投稿';}document.getElementById('diaryModal').classList.add('open');}
+function closeDM(){document.getElementById('diaryModal').classList.remove('open');}
+async function saveDiary(){const title=document.getElementById('dTitle').value.trim();const body=document.getElementById('dBody').value.trim();if(!title||!body){admShowToast('タイトルと本文を入力してください');return;}const data={title,body,author:document.getElementById('dAuthor').value,photos:diaryPhotos};if(editDiaryId){await sb.from('diaries').update(data).eq('id',editDiaryId);}else{data.id=Date.now().toString();await sb.from('diaries').insert(data);}admShowToast('保存しました ✓');closeDM();loadDiaries();}
+async function delDiary(id){if(!confirm('削除しますか？'))return;await sb.from('diaries').delete().eq('id',id);admShowToast('削除しました');loadDiaries();}
+async function loadDiaries(){const el=document.getElementById('diaryList');el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">読み込み中...</p>';const{data}=await sb.from('diaries').select('*').order('created_at',{ascending:false});if(!data||!data.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">まだ投稿がありません</p>';return;}el.innerHTML=data.map(d=>{const dt=new Date(d.created_at);const ds=`${dt.getFullYear()}/${dt.getMonth()+1}/${dt.getDate()}`;return`<div class="adm-diary-item"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><div><div style="font-size:14px;font-weight:700;color:var(--navy)">${d.title}</div><div style="font-size:12px;color:var(--accent)">${d.author||'スタッフ'}</div></div><span style="font-size:11px;color:var(--muted)">${ds}</span></div><div style="font-size:13px;color:var(--text);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${d.body}</div><div style="display:flex;gap:6px;margin-top:10px"><button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="openDM('${d.id}')">編集</button><button class="adm-btn adm-btn-danger adm-btn-sm" onclick="delDiary('${d.id}')">削除</button></div></div>`;}).join('');}
+let curRankArea='all',dragSrc=null;
+async function loadRankList(){const el=document.getElementById('rankList');const{data}=await sb.from('rankings').select('*').eq('area',curRankArea).single();const list=(data&&data.names)||[];const medals=['🥇','🥈','🥉'];if(!list.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:16px 0">まだキャストがいません</p>';return;}el.innerHTML=list.map((name,i)=>`<div class="adm-rank-item" draggable="true" ondragstart="dStart(event,${i})" ondragover="dOver(event)" ondrop="dDrop(event,${i})" ondragend="dEnd()"><span style="font-size:22px;min-width:32px;text-align:center">${medals[i]||`${i+1}位`}</span><span style="color:var(--muted);font-size:18px">⠿</span><span style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">${name}</span><button onclick="rmRank(${i})" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:0 4px">✕</button></div>`).join('');}
+async function loadRankSelect(){const{data:casts}=await sb.from('casts').select('name').eq('status','active');const{data:rank}=await sb.from('rankings').select('names').eq('area',curRankArea).single();const already=(rank&&rank.names)||[];const sel=document.getElementById('rankAdd');sel.innerHTML='<option value="">キャストを選んで追加</option>'+(casts||[]).filter(c=>!already.includes(c.name)).map(c=>`<option value="${c.name}">${c.name}</option>`).join('');}
+async function saveRank(list){await sb.from('rankings').upsert({area:curRankArea,names:list});}
+async function addRank(){const name=document.getElementById('rankAdd').value;if(!name)return;const{data}=await sb.from('rankings').select('names').eq('area',curRankArea).single();const list=[...((data&&data.names)||[]),name];await saveRank(list);admShowToast('保存しました ✓');loadRankList();loadRankSelect();}
+async function rmRank(i){const{data}=await sb.from('rankings').select('names').eq('area',curRankArea).single();const list=[...((data&&data.names)||[])];list.splice(i,1);await saveRank(list);admShowToast('保存しました ✓');loadRankList();loadRankSelect();}
+function showRankTab(area,btn){curRankArea=area;document.querySelectorAll('#rankTabs .adm-btn').forEach(b=>{b.className=b===btn?'adm-btn adm-btn-primary adm-btn-sm':'adm-btn adm-btn-ghost adm-btn-sm';});loadRankList();loadRankSelect();}
+function dStart(e,i){dragSrc=i;e.dataTransfer.effectAllowed='move';}
+function dOver(e){e.preventDefault();}
+async function dDrop(e,i){e.preventDefault();if(dragSrc===null||dragSrc===i)return;const{data}=await sb.from('rankings').select('names').eq('area',curRankArea).single();const list=[...((data&&data.names)||[])];const[m]=list.splice(dragSrc,1);list.splice(i,0,m);await saveRank(list);loadRankList();}
+function dEnd(){dragSrc=null;}
+let rvFilter='all';
+async function loadReviewAdmin(){const el=document.getElementById('reviewAdminList');el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">読み込み中...</p>';let q=sb.from('reviews').select('*').order('created_at',{ascending:false});if(rvFilter==='pending')q=q.eq('approved',false);if(rvFilter==='approved')q=q.eq('approved',true);const{data}=await q;if(!data||!data.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">口コミがありません</p>';return;}el.innerHTML=data.map(r=>{const stars='★'.repeat(r.star)+'☆'.repeat(5-r.star);const dt=new Date(r.created_at);const ds=`${dt.getFullYear()}/${dt.getMonth()+1}/${dt.getDate()}`;const st=r.approved?'<span style="font-size:10px;background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:10px;font-weight:700">公開中</span>':'<span style="font-size:10px;background:#FFF3E0;color:#E65100;padding:2px 8px;border-radius:10px;font-weight:700">承認待ち</span>';return`<div class="adm-review-item"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="color:#C9A84C;font-size:14px">${stars}</span><div style="display:flex;align-items:center;gap:8px">${st}<span style="font-size:11px;color:var(--muted)">${ds}</span></div></div><div style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:8px">${r.body}</div><div style="font-size:11px;color:var(--muted);margin-bottom:10px">${r.name}さん・${r.area}</div><div style="display:flex;gap:6px">${!r.approved?`<button class="adm-btn adm-btn-primary adm-btn-sm" onclick="approveRv('${r.id}')">✓ 公開</button>`:''}${r.approved?`<button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="rejectRv('${r.id}')">非公開</button>`:''}<button class="adm-btn adm-btn-danger adm-btn-sm" onclick="delRv('${r.id}')">削除</button></div></div>`;}).join('');}
+async function approveRv(id){await sb.from('reviews').update({approved:true}).eq('id',id);admShowToast('公開しました ✓');loadReviewAdmin();updateStats();}
+async function rejectRv(id){await sb.from('reviews').update({approved:false}).eq('id',id);admShowToast('非公開にしました');loadReviewAdmin();}
+async function delRv(id){if(!confirm('削除しますか？'))return;await sb.from('reviews').delete().eq('id',id);admShowToast('削除しました');loadReviewAdmin();updateStats();}
+function filterRv(f,btn){rvFilter=f;document.querySelectorAll('#adm-review .adm-btn').forEach(b=>{b.className=b===btn?'adm-btn adm-btn-primary adm-btn-sm':'adm-btn adm-btn-ghost adm-btn-sm';});loadReviewAdmin();}
+function admShowToast(msg){const t=document.getElementById('admToast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+const hbg=document.getElementById('hbg'),drw=document.getElementById('drawer'),ov=document.getElementById('ov');
+hbg.addEventListener('click',()=>{const o=drw.classList.toggle('open');ov.classList.toggle('open',o);hbg.classList.toggle('open',o);});
+function cn(){drw.classList.remove('open');ov.classList.remove('open');hbg.classList.remove('open');}
+window.addEventListener('scroll',()=>{document.querySelector('header').style.boxShadow=scrollY>10?'0 2px 24px rgba(0,0,0,.35)':'none';});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.07});
+document.querySelectorAll('section:not(#hero)').forEach(s=>obs.observe(s));
+let currentCastArea='all';
+function switchArea(area,btn){currentCastArea=area;document.querySelectorAll('#cast .area-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderSiteCasts();}
+function switchPrice(area,btn){document.querySelectorAll('.price-area').forEach(p=>p.style.display='none');document.getElementById('price-'+area).style.display='block';document.querySelectorAll('#price .area-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
+async function renderSiteCasts(){const grid=document.getElementById('castGrid');const{data}=await sb.from('casts').select('*').eq('status','active').order('created_at',{ascending:false});if(!data||!data.length){grid.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">キャストを準備中です</p>';return;}const filtered=currentCastArea==='all'?data:data.filter(c=>c.area===currentCastArea);if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">このエリアのキャストは準備中です</p>';return;}const areaColors={tokyo:{bg:'rgba(40,160,120,0.12)',color:'#1a7a5a',label:'🟢 東京'},saitama:{bg:'rgba(91,158,201,0.15)',color:'var(--mid)',label:'🔵 埼玉'},gunma:{bg:'rgba(200,150,50,0.12)',color:'#8a6010',label:'🟡 群馬'}};grid.innerHTML=filtered.map(c=>{const ac=areaColors[c.area]||{bg:'var(--pale)',color:'var(--muted)',label:''};const photo=c.photos&&c.photos[0]?`<img src="${c.photos[0].dataUrl}" style="width:100%;height:100%;object-fit:cover">`:'👨';const tags=(c.tags||[]).map(t=>`<span class="cast-tag">${t}</span>`).join('');const xBtn=c.x_url?`<a href="${c.x_url}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#000;color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px">𝕏 DMで相談する</a>`:'';return`<div class="cast-card"><div class="cast-photo">${photo}</div><div class="cast-info"><div style="font-size:10px;background:${ac.bg};color:${ac.color};padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:6px">${ac.label}</div><div class="cast-name">${c.name}</div><div class="cast-age">${c.age||''}歳</div><div class="cast-tags">${tags}</div>${xBtn}</div></div>`;}).join('');}
+renderSiteCasts();
+async function renderSiteRanking(area){const{data}=await sb.from('rankings').select('names').eq('area',area).single();const names=(data&&data.names)||[];const{data:casts}=await sb.from('casts').select('*').eq('status','active');const list=names.map(name=>(casts||[]).find(c=>c.name===name)).filter(Boolean);const medalColor=['#C9A84C','#9BA7B0','#C47A45'],medalLabel=['1st','2nd','3rd'];document.getElementById('rankingWrap').innerHTML=list.length?list.map((c,i)=>{const isTop=i===0;const medal=medalColor[i]||'#888';const label=medalLabel[i]||`${i+1}位`;const areaColor=c.area==='tokyo'?'rgba(40,160,120,0.12)':c.area==='saitama'?'rgba(91,158,201,0.15)':'rgba(200,150,50,0.12)';const areaText=c.area==='tokyo'?'#1a7a5a':c.area==='saitama'?'#2E6FA3':'#8a6010';const areaIcon=c.area==='tokyo'?'🟢':c.area==='saitama'?'🔵':'🟡';const areaName=c.area==='tokyo'?'東京':c.area==='saitama'?'埼玉':'群馬';const photo=c.photos&&c.photos[0]?`<img src="${c.photos[0].dataUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:10px">`:'👨';return`<div style="display:flex;align-items:center;gap:14px;padding:${isTop?'18px':'14px'} 16px;background:${isTop?'rgba(201,168,76,0.07)':'#fff'};border:1px solid ${isTop?'rgba(201,168,76,0.35)':'var(--border)'};border-radius:${isTop?'14px':'10px'};margin-bottom:10px"><div style="min-width:48px;height:48px;border-radius:50%;background:${medal};display:flex;align-items:center;justify-content:center;font-size:${isTop?'18px':'14px'};font-weight:800;color:#fff;flex-shrink:0">${label}</div><div style="width:${isTop?'58px':'48px'};height:${isTop?'58px':'48px'};min-width:${isTop?'58px':'48px'};background:linear-gradient(160deg,var(--navy),var(--blue));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:${isTop?'30px':'24px'};flex-shrink:0;overflow:hidden">${photo}</div><div style="flex:1;min-width:0"><div style="font-size:${isTop?'17px':'15px'};font-weight:800;color:var(--navy);margin-bottom:3px">${c.name}</div><div style="font-size:11px;color:var(--muted);margin-bottom:5px">${(c.tags||[]).join('・')}</div><span style="font-size:10px;background:${areaColor};color:${areaText};padding:2px 8px;border-radius:10px">${areaIcon} ${areaName}</span></div>${isTop?'<div style="font-size:22px">👑</div>':''}</div>`;}).join(''):'<p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">ランキングを準備中です</p>';}
+function switchRank(area,btn){document.querySelectorAll('#ranking .area-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderSiteRanking(area);}
+renderSiteRanking('all');
+const simState={area:'tokyo',course:'basic',time:90,shimen:0,encho:0,shinya:0,kotsu:1100};
+const coursePrices={basic:{90:16000,120:21500,150:27000,180:32500},tomari:{0:60000},couple:{90:30000,120:38000,150:46000,180:54000}};
+const kotsuOptions={tokyo:[{label:'23区内 ¥1,100',val:1100},{label:'23区外 ¥2,200〜',val:2200}],saitama:[{label:'さいたま市内 ¥1,100',val:1100},{label:'市外 ¥2,200〜',val:2200}],gunma:[{label:'高崎・前橋市内 ¥2,200',val:2200},{label:'市外 ¥3,300〜',val:3300}]};
+function setSim(key,val,btn){simState[key]=val;btn.parentElement.querySelectorAll('.sim-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(key==='course')updateCourseUI();if(key==='area')updateKotsuUI();calcSim();}
+function updateCourseUI(){const tb=document.getElementById('timeBlock');if(simState.course==='tomari'){tb.style.display='none';simState.time=0;}else{tb.style.display='block';simState.time=90;tb.querySelectorAll('.sim-btn').forEach((b,i)=>b.classList.toggle('active',i===0));}}
+function updateKotsuUI(){const opts=kotsuOptions[simState.area];document.getElementById('kotsuBtns').innerHTML=opts.map((o,i)=>`<button class="sim-btn${i===0?' active':''}" onclick="setSim('kotsu',${o.val},this)">${o.label}</button>`).join('');simState.kotsu=opts[0].val;}
+function calcSim(){const base=coursePrices[simState.course][simState.time]||0;const total=base+simState.shimen+simState.encho+simState.shinya+simState.kotsu;document.getElementById('simTotal').textContent='¥'+total.toLocaleString();const rows=[['コース料金',base],['指名料',simState.shimen],['延長料金',simState.encho],['深夜料金',simState.shinya],['交通費',simState.kotsu]].filter(r=>r[1]>0).map(r=>`${r[0]}：¥${r[1].toLocaleString()}`).join('　／　');document.getElementById('simBreakdown').textContent=rows;}
+updateKotsuUI();calcSim();
+function toggleFaq(el){const body=el.querySelector('.faq-body');const icon=el.querySelector('.faq-icon');const isOpen=body.style.display==='block';body.style.display=isOpen?'none':'block';icon.textContent=isOpen?'＋':'－';}
+let currentStar=0;
+function setStar(val){currentStar=val;document.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<val?'★':'☆';s.style.color=i<val?'#C9A84C':'#ccc';});}
+async function submitReview(){const name=document.getElementById('reviewName').value.trim();const area=document.getElementById('reviewArea').value;const body=document.getElementById('reviewBody').value.trim();if(!currentStar){alert('評価を選んでください');return;}if(!name){alert('ニックネームを入力してください');return;}if(!area){alert('利用エリアを選んでください');return;}if(!body){alert('口コミ内容を入力してください');return;}const{error}=await sb.from('reviews').insert({name,area,body,star:currentStar,approved:false});if(error){alert('送信に失敗しました');console.error(error);return;}document.getElementById('reviewName').value='';document.getElementById('reviewArea').value='';document.getElementById('reviewBody').value='';setStar(0);document.getElementById('reviewCoupon').style.display='block';document.getElementById('reviewCoupon').scrollIntoView({behavior:'smooth'});}
+async function renderReviews(){const{data}=await sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false});const el=document.getElementById('reviewList');if(!data||!data.length){el.innerHTML='<p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">まだ口コミがありません。最初の口コミをお待ちしています！</p>';return;}el.innerHTML=data.map(r=>{const stars='★'.repeat(r.star)+'☆'.repeat(5-r.star);const dt=new Date(r.created_at);const ds=`${dt.getFullYear()}/${dt.getMonth()+1}/${dt.getDate()}`;const areaColor=r.area==='東京'?'rgba(40,160,120,0.12)':r.area==='埼玉'?'rgba(91,158,201,0.15)':'rgba(200,150,50,0.12)';const areaText=r.area==='東京'?'#1a7a5a':r.area==='埼玉'?'#2E6FA3':'#8a6010';const areaIcon=r.area==='東京'?'🟢':r.area==='埼玉'?'🔵':'🟡';return`<div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span style="color:#C9A84C;font-size:16px;letter-spacing:2px">${stars}</span><span style="font-size:11px;color:var(--muted)">${ds}</span></div><div style="font-size:13px;color:var(--text);line-height:1.85;margin-bottom:10px">${r.body}</div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;font-weight:700;color:var(--navy)">${r.name}さん</span><span style="font-size:10px;background:${areaColor};color:${areaText};padding:2px 8px;border-radius:10px">${areaIcon} ${r.area}</span></div></div>`;}).join('');}
+renderReviews();
+</script>
+</body>
+</html>

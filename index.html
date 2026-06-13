@@ -331,7 +331,7 @@ section.visible{opacity:1;transform:translateY(0)}
     
     <div class="adm-page" id="adm-shift">
       <div class="adm-card"><div class="adm-card-head"><h2>📅 シフト管理</h2></div><div class="adm-card-body">
-        <div style="margin-bottom:16px"><label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px">キャストを選択</label><select id="shiftCastSel" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)" onchange="loadShiftCalendar()"><option value="">選択してください</option></select></div>
+        <div style="margin-bottom:16px"><label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px">キャストを選択</label><select id="shiftCastSel" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)" onchange="loadShiftCalendar()" onclick="loadShiftCasts()"><option value="">選択してください</option></select></div>
         <div id="shiftSection" style="display:none">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
             <button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="changeShiftWeek(-7)">◀ 前週</button>

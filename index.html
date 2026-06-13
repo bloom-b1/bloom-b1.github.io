@@ -1172,6 +1172,7 @@ async function renderCpShift(castId) {
   if(!hasAnyShift){html='<p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">現在スケジュールが登録されていません</p>';}
   else{html+='</div>';}
   return {html, hasAny: hasAnyShift};
+}
 
 async function loadReservations() {
   const el = document.getElementById('reservationList');

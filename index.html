@@ -923,14 +923,19 @@ function rmSlot(i) {currentSlots.splice(i,1);renderSlots();}
 async function saveSlots() {
   const castId = document.getElementById('availCastSel').value;
   if (!castId) return;
-  await sb.from('availability').upsert({id: castId, cast_id: castId, time_slots: currentSlots, is_available_now: document.getElementById('availNow').checked});
+  const isNow = document.getElementById('availNow').checked;
+  const {error} = await sb.from('availability').upsert({id: castId, cast_id: castId, time_slots: currentSlots, is_available_now: isNow}, {onConflict: 'id'});
+  if (error) { console.error(error); admShowToast('エラー: ' + error.message); return; }
   admShowToast('保存しました ✓');
+  renderSiteCasts();
 }
 
 async function saveAvailNow() {
   const castId = document.getElementById('availCastSel').value;
   if (!castId) return;
-  await sb.from('availability').upsert({id: castId, cast_id: castId, time_slots: currentSlots, is_available_now: document.getElementById('availNow').checked});
+  const isNow = document.getElementById('availNow').checked;
+  const {error} = await sb.from('availability').upsert({id: castId, cast_id: castId, time_slots: currentSlots, is_available_now: isNow}, {onConflict: 'id'});
+  if (error) { console.error(error); admShowToast('エラー: ' + error.message); return; }
   admShowToast('保存しました ✓');
   renderSiteCasts();
 }

@@ -215,6 +215,40 @@ section.visible{opacity:1;transform:translateY(0)}
 #adminPanel{overflow-y:auto}
 .adm-back-btn{display:block!important}
 }
+
+/* キャスト個別ページ */
+#castPage{display:none;position:fixed;inset:0;z-index:2000;background:var(--white);overflow-y:auto}
+#castPage.open{display:block}
+.cp-header{background:var(--navy);padding:60px 22px 28px;position:relative}
+.cp-back{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.15);border:none;color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit}
+.cp-photo{width:120px;height:160px;border-radius:12px;overflow:hidden;margin:0 auto 16px;background:linear-gradient(160deg,var(--navy),var(--blue))}
+.cp-photo img{width:100%;height:100%;object-fit:cover}
+.cp-name{font-size:24px;font-weight:800;color:#fff;text-align:center;margin-bottom:4px}
+.cp-age{font-size:13px;color:rgba(255,255,255,.6);text-align:center;margin-bottom:12px}
+.cp-area-badge{display:inline-block;font-size:11px;padding:4px 12px;border-radius:20px;margin:0 auto 12px;display:block;text-align:center;width:fit-content;margin:0 auto 16px}
+.cp-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px}
+.cp-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:11px;padding:4px 12px;border-radius:20px}
+.cp-available{display:inline-flex;align-items:center;gap:6px;background:#06C755;color:#fff;font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;margin:0 auto 16px;display:none}
+.cp-available.show{display:inline-flex}
+.cp-body{padding:22px;max-width:480px;margin:0 auto}
+.cp-section{margin-bottom:28px}
+.cp-section-title{font-size:14px;font-weight:800;color:var(--navy);letter-spacing:.1em;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--pale)}
+.cp-bio{font-size:14px;color:var(--text);line-height:2.2;background:var(--frost);border-radius:var(--r);padding:18px}
+.cp-schedule{background:var(--frost);border-radius:var(--r);overflow:hidden}
+.cp-schedule-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px}
+.cp-schedule-row:last-child{border-bottom:none}
+.cp-diary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cp-diary-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden}
+.cp-diary-img{width:100%;aspect-ratio:4/3;background:var(--pale);display:flex;align-items:center;justify-content:center;font-size:32px}
+.cp-diary-img img{width:100%;height:100%;object-fit:cover}
+.cp-diary-info{padding:10px}
+.cp-diary-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.cp-diary-date{font-size:11px;color:var(--muted)}
+.now-badge{display:inline-flex;align-items:center;gap:4px;background:#06C755;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;margin-left:6px}
+
+/* 管理画面の空き設定 */
+.adm-slot-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.adm-slot-row input[type=text]{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit}
 </style>
 </head>
 <body>
@@ -236,6 +270,7 @@ section.visible{opacity:1;transform:translateY(0)}
     <div class="adm-link" onclick="admPage('cast',this)"><span>👤</span> キャスト管理</div>
     <div class="adm-link" onclick="admPage('diary',this)"><span>📝</span> 写メ日記</div>
     <div class="adm-link" onclick="admPage('ranking',this)"><span>🏆</span> ランキング</div>
+    <div class="adm-link" onclick="admPage('availability',this)"><span>🟢</span> 空き管理</div>
     <div class="adm-link" onclick="admPage('review',this)"><span>⭐</span> 口コミ管理</div>
   </nav>
   <div class="adm-footer"><a onclick="closeAdmin()" style="cursor:pointer;color:rgba(255,255,255,.35);font-size:12px">← サイトに戻る</a></div><a class="adm-back-btn" onclick="closeAdmin()" style="display:none;cursor:pointer;color:rgba(255,255,255,.5);font-size:12px;padding:8px 12px">← 戻る</a>
@@ -270,7 +305,26 @@ section.visible{opacity:1;transform:translateY(0)}
         <div style="display:flex;gap:8px"><select id="rankAdd" style="flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text)"><option value="">キャストを選んで追加</option></select><button class="adm-btn adm-btn-primary adm-btn-sm" onclick="addRank()">追加</button></div>
       </div></div>
     </div>
-    <div class="adm-page" id="adm-review">
+    
+    <div class="adm-page" id="adm-availability">
+      <div class="adm-card"><div class="adm-card-head"><h2>🟢 空き・予約時間管理</h2></div><div class="adm-card-body">
+        <div style="margin-bottom:16px"><label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px">キャストを選択</label><select id="availCastSel" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)" onchange="loadAvailability()"><option value="">選択してください</option></select></div>
+        <div id="availSection" style="display:none">
+          <div style="background:var(--frost);border-radius:var(--r);padding:16px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><span style="font-size:13px;font-weight:700;color:var(--navy)">🟢 今すぐ会える</span><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="availNow" onchange="saveAvailNow()" style="width:18px;height:18px"><span style="font-size:13px;color:var(--muted)">ON</span></label></div>
+            <p style="font-size:12px;color:var(--muted)">ONにするとキャスト一覧・個別ページに「今すぐ会える」バッジが表示されます</p>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">📅 予約可能時間</div>
+          <div id="slotList" style="margin-bottom:12px"></div>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="slotInput" placeholder="例：13:00〜18:00" style="flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit">
+            <button class="adm-btn adm-btn-primary adm-btn-sm" onclick="addSlot()">追加</button>
+          </div>
+          <button class="adm-btn adm-btn-primary" style="margin-top:14px;width:100%" onclick="saveSlots()">保存する</button>
+        </div>
+      </div></div>
+    </div>
+<div class="adm-page" id="adm-review">
       <div class="adm-card"><div class="adm-card-head"><h2>⭐ 口コミ管理</h2></div><div class="adm-card-body">
         <div style="display:flex;gap:8px;margin-bottom:16px">
           <button class="adm-btn adm-btn-primary adm-btn-sm" onclick="filterRv('all',this)">すべて</button>
@@ -557,6 +611,52 @@ section.visible{opacity:1;transform:translateY(0)}
   <p class="ft-copy">© 2024 BLOOM. All Rights Reserved.</p>
 </footer>
 <a href="https://lin.ee/8peUllI" target="_blank" class="float-l"><span class="li">💬</span><span>LINE</span></a>
+
+<!-- キャスト個別ページ -->
+<div id="castPage">
+  <div class="cp-header">
+    <button class="cp-back" onclick="closeCastPage()">← 戻る</button>
+    <div class="cp-photo" id="cpPagePhoto"><span style="font-size:54px;display:flex;align-items:center;justify-content:center;height:100%">👨</span></div>
+    <div class="cp-name" id="cpPageName"></div>
+    <div class="cp-age" id="cpPageAge"></div>
+    <div class="cp-area-badge" id="cpPageArea"></div>
+    <div class="cp-available" id="cpPageAvailable">🟢 今すぐ会える！</div>
+    <div class="cp-tags" id="cpPageTags"></div>
+    <div style="text-align:center">
+      <a id="cpPageX" href="#" target="_blank" style="display:none;display:inline-flex;align-items:center;gap:6px;background:#000;color:#fff;font-size:12px;font-weight:700;padding:8px 18px;border-radius:20px">𝕏 DMで相談する</a>
+    </div>
+  </div>
+  <div class="cp-body">
+    <div class="cp-section" id="cpBioSection">
+      <div class="cp-section-title">👋 自己紹介</div>
+      <div class="cp-bio" id="cpPageBio"></div>
+    </div>
+    <div class="cp-section" id="cpScheduleSection">
+      <div class="cp-section-title">📅 予約可能時間</div>
+      <div class="cp-schedule" id="cpPageSchedule"></div>
+    </div>
+    <div class="cp-section" id="cpDiarySection">
+      <div class="cp-section-title">📷 写メ日記</div>
+      <div class="cp-diary-grid" id="cpPageDiary"></div>
+    </div>
+    <div class="cp-section">
+      <div class="cp-section-title">⭐ 口コミ</div>
+      <div id="cpPageReviews"></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:16px">
+        <div style="background:var(--navy);color:#fff;padding:13px 20px;font-size:13px;font-weight:700">✏️ 口コミを投稿する</div>
+        <div style="padding:20px">
+          <div style="margin-bottom:16px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px">評価</div><div id="cpStarRating" style="display:flex;gap:6px"><span class="cpStar" onclick="setCpStar(1)" style="font-size:28px;cursor:pointer">☆</span><span class="cpStar" onclick="setCpStar(2)" style="font-size:28px;cursor:pointer">☆</span><span class="cpStar" onclick="setCpStar(3)" style="font-size:28px;cursor:pointer">☆</span><span class="cpStar" onclick="setCpStar(4)" style="font-size:28px;cursor:pointer">☆</span><span class="cpStar" onclick="setCpStar(5)" style="font-size:28px;cursor:pointer">☆</span></div></div>
+          <div style="margin-bottom:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px">ニックネーム</div><input id="cpReviewName" type="text" placeholder="例：りょうこ" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:14px;font-family:inherit"></div>
+          <div style="margin-bottom:20px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px">口コミ内容</div><textarea id="cpReviewBody" placeholder="ご利用の感想をお書きください" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:14px;font-family:inherit;min-height:100px;resize:vertical"></textarea></div>
+          <button onclick="submitCpReview()" style="width:100%;background:var(--mid);color:#fff;border:none;padding:14px;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">口コミを投稿する</button>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <a href="https://lin.ee/8peUllI" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#06C755;color:#fff;padding:14px 32px;border-radius:24px;font-size:14px;font-weight:700">💬 LINEで予約する</a>
+    </div>
+  </div>
+</div>
 </div>
 <script>
 const SUPABASE_URL='https://zphfaomajonxxxxdcxww.supabase.co';
@@ -568,7 +668,7 @@ window.addEventListener('hashchange',checkAdmin);
 checkAdmin();
 function checkPw(){const pw=document.getElementById('pwInput').value;if(pw===ADMIN_PW){document.getElementById('adminLogin').classList.remove('show');document.getElementById('adminPanel').classList.add('show');document.getElementById('site').style.display='none';updateStats();}else{document.getElementById('loginErr').style.display='block';document.getElementById('pwInput').value='';}}
 function closeAdmin(){document.getElementById('adminPanel').classList.remove('show');document.getElementById('site').style.display='block';window.location.hash='';}
-function admPage(id,el){document.querySelectorAll('.adm-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.adm-link').forEach(l=>l.classList.remove('active'));document.getElementById('adm-'+id).classList.add('active');el.classList.add('active');const titles={dashboard:'ダッシュボード',cast:'キャスト管理',diary:'写メ日記',ranking:'ランキング管理',review:'口コミ管理'};document.getElementById('admTitle').textContent=titles[id]||id;if(id==='cast')loadCasts();if(id==='diary')loadDiaries();if(id==='ranking'){loadRankList();loadRankSelect();}if(id==='review')loadReviewAdmin();if(id==='dashboard')updateStats();}
+function admPage(id,el){document.querySelectorAll('.adm-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.adm-link').forEach(l=>l.classList.remove('active'));document.getElementById('adm-'+id).classList.add('active');el.classList.add('active');const titles={dashboard:'ダッシュボード',cast:'キャスト管理',diary:'写メ日記',ranking:'ランキング管理',review:'口コミ管理',availability:'空き・予約時間管理'};document.getElementById('admTitle').textContent=titles[id]||id;if(id==='cast')loadCasts();if(id==='diary')loadDiaries();if(id==='ranking'){loadRankList();loadRankSelect();}if(id==='review')loadReviewAdmin();if(id==='availability'){loadAvailCasts();}if(id==='dashboard')updateStats();}
 async function updateStats(){const[{count:c1},{count:c2},{count:c3}]=await Promise.all([sb.from('casts').select('id',{count:'exact'}).eq('status','active'),sb.from('diaries').select('id',{count:'exact'}),sb.from('reviews').select('id',{count:'exact'}).eq('approved',true)]);document.getElementById('s-cast').textContent=c1||0;document.getElementById('s-diary').textContent=c2||0;document.getElementById('s-review').textContent=c3||0;}
 let editCastId=null,castPhotos=[],castTags=[];
 function fileToB64(f){return new Promise(r=>{const fr=new FileReader();fr.onload=e=>r({name:f.name,dataUrl:e.target.result});fr.readAsDataURL(f);})}
@@ -619,7 +719,14 @@ document.querySelectorAll('section:not(#hero)').forEach(s=>obs.observe(s));
 let currentCastArea='all';
 function switchArea(area,btn){currentCastArea=area;document.querySelectorAll('#cast .area-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderSiteCasts();}
 function switchPrice(area,btn){document.querySelectorAll('.price-area').forEach(p=>p.style.display='none');document.getElementById('price-'+area).style.display='block';document.querySelectorAll('#price .area-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
-async function renderSiteCasts(){const grid=document.getElementById('castGrid');const{data}=await sb.from('casts').select('*').eq('status','active').order('created_at',{ascending:false});if(!data||!data.length){grid.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">キャストを準備中です</p>';return;}const filtered=currentCastArea==='all'?data:data.filter(c=>c.area===currentCastArea);if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">このエリアのキャストは準備中です</p>';return;}const areaColors={tokyo:{bg:'rgba(40,160,120,0.12)',color:'#1a7a5a',label:'🟢 東京'},saitama:{bg:'rgba(91,158,201,0.15)',color:'var(--mid)',label:'🔵 埼玉'},gunma:{bg:'rgba(200,150,50,0.12)',color:'#8a6010',label:'🟡 群馬'}};grid.innerHTML=filtered.map(c=>{const ac=areaColors[c.area]||{bg:'var(--pale)',color:'var(--muted)',label:''};const photo=c.photos&&c.photos[0]?`<img src="${c.photos[0].dataUrl}" style="width:100%;height:100%;object-fit:cover">`:'👨';const tags=(c.tags||[]).map(t=>`<span class="cast-tag">${t}</span>`).join('');const xBtn=c.x_url?`<a href="${c.x_url}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#000;color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px">𝕏 DMで相談する</a>`:'';return`<div class="cast-card"><div class="cast-photo">${photo}</div><div class="cast-info"><div style="font-size:10px;background:${ac.bg};color:${ac.color};padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:6px">${ac.label}</div><div class="cast-name">${c.name}</div><div class="cast-age">${c.age||''}歳</div><div class="cast-tags">${tags}</div>${xBtn}</div></div>`;}).join('');}
+async function renderSiteCasts(){const grid=document.getElementById('castGrid');
+  const[{data},{data:availData}]=await Promise.all([
+    sb.from('casts').select('*').eq('status','active').order('created_at',{ascending:false}),
+    sb.from('availability').select('cast_id,is_available_now')
+  ]);
+  const availMap={};(availData||[]).forEach(a=>{availMap[a.cast_id]=a.is_available_now;});
+  const castData=(data||[]).map(c=>({...c,is_available_now:availMap[c.id]||false}));
+  const dataForRender=castData;if(!dataForRender||!dataForRender.length){grid.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">キャストを準備中です</p>';return;}const filtered=currentCastArea==='all'?dataForRender:dataForRender.filter(c=>c.area===currentCastArea);if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0;grid-column:1/-1">このエリアのキャストは準備中です</p>';return;}const areaColors={tokyo:{bg:'rgba(40,160,120,0.12)',color:'#1a7a5a',label:'🟢 東京'},saitama:{bg:'rgba(91,158,201,0.15)',color:'var(--mid)',label:'🔵 埼玉'},gunma:{bg:'rgba(200,150,50,0.12)',color:'#8a6010',label:'🟡 群馬'}};grid.innerHTML=filtered.map(c=>{const ac=areaColors[c.area]||{bg:'var(--pale)',color:'var(--muted)',label:''};const photo=c.photos&&c.photos[0]?`<img src="${c.photos[0].dataUrl}" style="width:100%;height:100%;object-fit:cover">`:'👨';const tags=(c.tags||[]).map(t=>`<span class="cast-tag">${t}</span>`).join('');const xBtn=c.x_url?`<a href="${c.x_url}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#000;color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px">𝕏 DMで相談する</a>`:'';return`<div class="cast-card" onclick="openCastPage('${c.id}')" style="cursor:pointer"><div class="cast-photo">${photo}</div><div class="cast-info"><div style="display:flex;align-items:center;gap:4px;margin-bottom:6px"><div style="font-size:10px;background:${ac.bg};color:${ac.color};padding:2px 8px;border-radius:10px">${ac.label}</div>${c.is_available_now?'<span class="now-badge">🟢 今すぐ</span>':''}</div><div class="cast-name">${c.name}</div><div class="cast-age">${c.age||''}歳</div><div class="cast-tags">${tags}</div></div></div>`;}).join('');}
 renderSiteCasts();
 async function renderSiteRanking(area){const{data}=await sb.from('rankings').select('names').eq('area',area).single();const names=(data&&data.names)||[];const{data:casts}=await sb.from('casts').select('*').eq('status','active');const list=names.map(name=>(casts||[]).find(c=>c.name===name)).filter(Boolean);const medalColor=['#C9A84C','#9BA7B0','#C47A45'],medalLabel=['1st','2nd','3rd'];document.getElementById('rankingWrap').innerHTML=list.length?list.map((c,i)=>{const isTop=i===0;const medal=medalColor[i]||'#888';const label=medalLabel[i]||`${i+1}位`;const areaColor=c.area==='tokyo'?'rgba(40,160,120,0.12)':c.area==='saitama'?'rgba(91,158,201,0.15)':'rgba(200,150,50,0.12)';const areaText=c.area==='tokyo'?'#1a7a5a':c.area==='saitama'?'#2E6FA3':'#8a6010';const areaIcon=c.area==='tokyo'?'🟢':c.area==='saitama'?'🔵':'🟡';const areaName=c.area==='tokyo'?'東京':c.area==='saitama'?'埼玉':'群馬';const photo=c.photos&&c.photos[0]?`<img src="${c.photos[0].dataUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:10px">`:'👨';return`<div style="display:flex;align-items:center;gap:14px;padding:${isTop?'18px':'14px'} 16px;background:${isTop?'rgba(201,168,76,0.07)':'#fff'};border:1px solid ${isTop?'rgba(201,168,76,0.35)':'var(--border)'};border-radius:${isTop?'14px':'10px'};margin-bottom:10px"><div style="min-width:48px;height:48px;border-radius:50%;background:${medal};display:flex;align-items:center;justify-content:center;font-size:${isTop?'18px':'14px'};font-weight:800;color:#fff;flex-shrink:0">${label}</div><div style="width:${isTop?'58px':'48px'};height:${isTop?'58px':'48px'};min-width:${isTop?'58px':'48px'};background:linear-gradient(160deg,var(--navy),var(--blue));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:${isTop?'30px':'24px'};flex-shrink:0;overflow:hidden">${photo}</div><div style="flex:1;min-width:0"><div style="font-size:${isTop?'17px':'15px'};font-weight:800;color:var(--navy);margin-bottom:3px">${c.name}</div><div style="font-size:11px;color:var(--muted);margin-bottom:5px">${(c.tags||[]).join('・')}</div><span style="font-size:10px;background:${areaColor};color:${areaText};padding:2px 8px;border-radius:10px">${areaIcon} ${areaName}</span></div>${isTop?'<div style="font-size:22px">👑</div>':''}</div>`;}).join(''):'<p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">ランキングを準備中です</p>';}
 function switchRank(area,btn){document.querySelectorAll('#ranking .area-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderSiteRanking(area);}
@@ -638,6 +745,194 @@ function setStar(val){currentStar=val;document.querySelectorAll('.star').forEach
 async function submitReview(){const name=document.getElementById('reviewName').value.trim();const area=document.getElementById('reviewArea').value;const body=document.getElementById('reviewBody').value.trim();if(!currentStar){alert('評価を選んでください');return;}if(!name){alert('ニックネームを入力してください');return;}if(!area){alert('利用エリアを選んでください');return;}if(!body){alert('口コミ内容を入力してください');return;}const{error}=await sb.from('reviews').insert({name,area,body,star:currentStar,approved:false});if(error){alert('送信に失敗しました');console.error(error);return;}document.getElementById('reviewName').value='';document.getElementById('reviewArea').value='';document.getElementById('reviewBody').value='';setStar(0);document.getElementById('reviewCoupon').style.display='block';document.getElementById('reviewCoupon').scrollIntoView({behavior:'smooth'});}
 async function renderReviews(){const{data}=await sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false});const el=document.getElementById('reviewList');if(!data||!data.length){el.innerHTML='<p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">まだ口コミがありません。最初の口コミをお待ちしています！</p>';return;}el.innerHTML=data.map(r=>{const stars='★'.repeat(r.star)+'☆'.repeat(5-r.star);const dt=new Date(r.created_at);const ds=`${dt.getFullYear()}/${dt.getMonth()+1}/${dt.getDate()}`;const areaColor=r.area==='東京'?'rgba(40,160,120,0.12)':r.area==='埼玉'?'rgba(91,158,201,0.15)':'rgba(200,150,50,0.12)';const areaText=r.area==='東京'?'#1a7a5a':r.area==='埼玉'?'#2E6FA3':'#8a6010';const areaIcon=r.area==='東京'?'🟢':r.area==='埼玉'?'🔵':'🟡';return`<div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span style="color:#C9A84C;font-size:16px;letter-spacing:2px">${stars}</span><span style="font-size:11px;color:var(--muted)">${ds}</span></div><div style="font-size:13px;color:var(--text);line-height:1.85;margin-bottom:10px">${r.body}</div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;font-weight:700;color:var(--navy)">${r.name}さん</span><span style="font-size:10px;background:${areaColor};color:${areaText};padding:2px 8px;border-radius:10px">${areaIcon} ${r.area}</span></div></div>`;}).join('');}
 renderReviews();
+
+// ===== キャスト個別ページ =====
+let currentCastData = null;
+let cpCurrentStar = 0;
+
+async function openCastPage(castId) {
+  const {data: cast} = await sb.from('casts').select('*').eq('id', castId).single();
+  if (!cast) return;
+  currentCastData = cast;
+  
+  // 写真
+  const photoEl = document.getElementById('cpPagePhoto');
+  if (cast.photos && cast.photos[0]) {
+    photoEl.innerHTML = `<img src="${cast.photos[0].dataUrl}">`;
+  } else {
+    photoEl.innerHTML = '<span style="font-size:54px;display:flex;align-items:center;justify-content:center;height:100%">👨</span>';
+  }
+  
+  // 基本情報
+  document.getElementById('cpPageName').textContent = cast.name;
+  document.getElementById('cpPageAge').textContent = cast.age ? cast.age + '歳' : '';
+  
+  const areaColors = {tokyo:{bg:'rgba(40,160,120,0.2)',color:'#1a7a5a',label:'🟢 東京'},saitama:{bg:'rgba(91,158,201,0.2)',color:'#2E6FA3',label:'🔵 埼玉'},gunma:{bg:'rgba(200,150,50,0.2)',color:'#8a6010',label:'🟡 群馬'}};
+  const ac = areaColors[cast.area] || {bg:'var(--pale)',color:'var(--muted)',label:''};
+  const areaEl = document.getElementById('cpPageArea');
+  areaEl.textContent = ac.label;
+  areaEl.style.background = ac.bg;
+  areaEl.style.color = ac.color;
+  areaEl.style.padding = '4px 14px';
+  areaEl.style.borderRadius = '20px';
+  areaEl.style.fontSize = '12px';
+  areaEl.style.fontWeight = '700';
+  
+  // タグ
+  document.getElementById('cpPageTags').innerHTML = (cast.tags||[]).map(t=>`<span class="cp-tag">${t}</span>`).join('');
+  
+  // X
+  const xEl = document.getElementById('cpPageX');
+  if (cast.x_url) {
+    xEl.href = cast.x_url;
+    xEl.style.display = 'inline-flex';
+  } else {
+    xEl.style.display = 'none';
+  }
+  
+  // 自己紹介
+  const bioSection = document.getElementById('cpBioSection');
+  if (cast.bio) {
+    document.getElementById('cpPageBio').textContent = cast.bio;
+    bioSection.style.display = 'block';
+  } else {
+    bioSection.style.display = 'none';
+  }
+  
+  // 今すぐ会える
+  const {data: avail} = await sb.from('availability').select('*').eq('cast_id', castId).single();
+  const availEl = document.getElementById('cpPageAvailable');
+  if (avail && avail.is_available_now) {
+    availEl.classList.add('show');
+  } else {
+    availEl.classList.remove('show');
+  }
+  
+  // 予約可能時間
+  const scheduleEl = document.getElementById('cpPageSchedule');
+  const schedSection = document.getElementById('cpScheduleSection');
+  if (avail && avail.time_slots && avail.time_slots.length) {
+    schedSection.style.display = 'block';
+    scheduleEl.innerHTML = avail.time_slots.map(s=>`<div class="cp-schedule-row"><span>${s.date||'今日'}</span><span style="font-weight:700;color:var(--navy)">${s.time}</span></div>`).join('');
+  } else {
+    schedSection.style.display = 'none';
+  }
+  
+  // 写メ日記
+  const {data: diaries} = await sb.from('diaries').select('*').eq('author', cast.name).order('created_at', {ascending:false}).limit(6);
+  const diaryEl = document.getElementById('cpPageDiary');
+  const diarySection = document.getElementById('cpDiarySection');
+  if (diaries && diaries.length) {
+    diarySection.style.display = 'block';
+    diaryEl.innerHTML = diaries.map(d=>{
+      const img = d.photos&&d.photos[0] ? `<img src="${d.photos[0].dataUrl}">` : '<span>📷</span>';
+      const dt = new Date(d.created_at);
+      const ds = `${dt.getMonth()+1}/${dt.getDate()}`;
+      return `<div class="cp-diary-card"><div class="cp-diary-img">${img}</div><div class="cp-diary-info"><div class="cp-diary-title">${d.title}</div><div class="cp-diary-date">${ds}</div></div></div>`;
+    }).join('');
+  } else {
+    diarySection.style.display = 'none';
+  }
+  
+  // 口コミ
+  const {data: reviews} = await sb.from('reviews').select('*').eq('cast_name', cast.name).eq('approved', true).order('created_at', {ascending:false});
+  const reviewEl = document.getElementById('cpPageReviews');
+  if (reviews && reviews.length) {
+    reviewEl.innerHTML = reviews.map(r=>{
+      const stars = '★'.repeat(r.star)+'☆'.repeat(5-r.star);
+      const dt = new Date(r.created_at);
+      const ds = `${dt.getFullYear()}/${dt.getMonth()+1}/${dt.getDate()}`;
+      return `<div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="color:#C9A84C;font-size:14px">${stars}</span><span style="font-size:11px;color:var(--muted)">${ds}</span></div><div style="font-size:13px;color:var(--text);line-height:1.8;margin-bottom:6px">${r.body}</div><div style="font-size:11px;color:var(--muted)">${r.name}さん</div></div>`;
+    }).join('');
+  } else {
+    reviewEl.innerHTML = '<p style="text-align:center;font-size:13px;color:var(--muted);padding:16px 0">まだ口コミがありません</p>';
+  }
+  
+  // 星リセット
+  cpCurrentStar = 0;
+  document.querySelectorAll('.cpStar').forEach(s=>{s.textContent='☆';s.style.color='';});
+  document.getElementById('cpReviewName').value = '';
+  document.getElementById('cpReviewBody').value = '';
+  
+  document.getElementById('castPage').classList.add('open');
+  document.getElementById('castPage').scrollTop = 0;
+}
+
+function closeCastPage() {
+  document.getElementById('castPage').classList.remove('open');
+  currentCastData = null;
+}
+
+function setCpStar(val) {
+  cpCurrentStar = val;
+  document.querySelectorAll('.cpStar').forEach((s,i)=>{s.textContent=i<val?'★':'☆';s.style.color=i<val?'#C9A84C':'#ccc';});
+}
+
+async function submitCpReview() {
+  if (!currentCastData) return;
+  const name = document.getElementById('cpReviewName').value.trim();
+  const body = document.getElementById('cpReviewBody').value.trim();
+  if (!cpCurrentStar) {alert('評価を選んでください');return;}
+  if (!name) {alert('ニックネームを入力してください');return;}
+  if (!body) {alert('口コミ内容を入力してください');return;}
+  const {error} = await sb.from('reviews').insert({name, area: currentCastData.area==='tokyo'?'東京':currentCastData.area==='saitama'?'埼玉':'群馬', body, star: cpCurrentStar, approved: false, cast_name: currentCastData.name});
+  if (error) {alert('送信に失敗しました');return;}
+  alert('口コミを投稿しました！承認後に公開されます。');
+  document.getElementById('cpReviewName').value = '';
+  document.getElementById('cpReviewBody').value = '';
+  setCpStar(0);
+}
+
+// ===== 空き管理 =====
+let currentSlots = [];
+
+async function loadAvailCasts() {
+  const {data} = await sb.from('casts').select('id,name').eq('status','active');
+  const sel = document.getElementById('availCastSel');
+  sel.innerHTML = '<option value="">選択してください</option>' + (data||[]).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+}
+
+async function loadAvailability() {
+  const castId = document.getElementById('availCastSel').value;
+  if (!castId) {document.getElementById('availSection').style.display='none';return;}
+  document.getElementById('availSection').style.display = 'block';
+  const {data} = await sb.from('availability').select('*').eq('cast_id', castId).single();
+  document.getElementById('availNow').checked = data ? data.is_available_now : false;
+  currentSlots = data ? (data.time_slots || []) : [];
+  renderSlots();
+}
+
+function renderSlots() {
+  const el = document.getElementById('slotList');
+  if (!currentSlots.length) {el.innerHTML='<p style="font-size:13px;color:var(--muted);margin-bottom:8px">まだ設定がありません</p>';return;}
+  el.innerHTML = currentSlots.map((s,i)=>`<div class="adm-slot-row"><input type="text" value="${s.time}" onchange="currentSlots[${i}].time=this.value" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit"><button onclick="rmSlot(${i})" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px">✕</button></div>`).join('');
+}
+
+function addSlot() {
+  const val = document.getElementById('slotInput').value.trim();
+  if (!val) return;
+  currentSlots.push({time: val});
+  document.getElementById('slotInput').value = '';
+  renderSlots();
+}
+
+function rmSlot(i) {currentSlots.splice(i,1);renderSlots();}
+
+async function saveSlots() {
+  const castId = document.getElementById('availCastSel').value;
+  if (!castId) return;
+  await sb.from('availability').upsert({id: castId, cast_id: castId, time_slots: currentSlots, is_available_now: document.getElementById('availNow').checked});
+  admShowToast('保存しました ✓');
+}
+
+async function saveAvailNow() {
+  const castId = document.getElementById('availCastSel').value;
+  if (!castId) return;
+  await sb.from('availability').upsert({id: castId, cast_id: castId, time_slots: currentSlots, is_available_now: document.getElementById('availNow').checked});
+  admShowToast('保存しました ✓');
+  renderSiteCasts();
+}
+
 </script>
 </body>
 </html>

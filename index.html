@@ -291,6 +291,7 @@ section.visible{opacity:1;transform:translateY(0)}
     <div class="adm-link" onclick="admPage('cast',this)"><span>👤</span> キャスト管理</div>
     <div class="adm-link" onclick="admPage('diary',this)"><span>📝</span> 写メ日記</div>
     <div class="adm-link" onclick="admPage('ranking',this)"><span>🏆</span> ランキング</div>
+    <div class="adm-link" onclick="admPage('reservation',this)"><span>📋</span> 予約管理</div>
     <div class="adm-link" onclick="admPage('shift',this)"><span>📅</span> シフト管理</div>
     <div class="adm-link" onclick="admPage('availability',this)"><span>🟢</span> 空き管理</div>
     <div class="adm-link" onclick="admPage('review',this)"><span>⭐</span> 口コミ管理</div>
@@ -329,7 +330,19 @@ section.visible{opacity:1;transform:translateY(0)}
     </div>
     
     
-    <div class="adm-page" id="adm-shift">
+    
+    <div class="adm-page" id="adm-reservation">
+      <div class="adm-card"><div class="adm-card-head"><h2>📋 予約管理</h2><button class="adm-btn adm-btn-primary adm-btn-sm" onclick="openReservationModal()">＋ 予約追加</button></div><div class="adm-card-body">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+          <button class="adm-btn adm-btn-primary adm-btn-sm" onclick="filterRes('all',this)">すべて</button>
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="filterRes('today',this)">今日</button>
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="filterRes('upcoming',this)">今後</button>
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="filterRes('past',this)">過去</button>
+        </div>
+        <div id="reservationList"></div>
+      </div></div>
+    </div>
+<div class="adm-page" id="adm-shift">
       <div class="adm-card"><div class="adm-card-head"><h2>📅 シフト管理</h2></div><div class="adm-card-body">
         <div style="margin-bottom:16px"><label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px">キャストを選択</label><select id="shiftCastSel" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)" onchange="loadShiftCalendar()"><option value="">読み込み中...</option></select></div>
         <div id="shiftSection" style="display:none">
@@ -406,6 +419,25 @@ section.visible{opacity:1;transform:translateY(0)}
       <div class="adm-form-row"><label>本文</label><textarea id="dBody" placeholder="内容を入力" style="min-height:140px"></textarea></div>
     </div>
     <div class="adm-modal-foot"><button class="adm-btn adm-btn-ghost" onclick="closeDM()">キャンセル</button><button class="adm-btn adm-btn-primary" onclick="saveDiary()">投稿</button></div>
+  </div>
+</div>
+
+<div class="adm-modal-bg" id="reservationModal">
+  <div class="adm-modal">
+    <div class="adm-modal-head"><h3 id="resMTitle">予約を追加</h3><button class="adm-modal-close" onclick="closeReservationModal()">✕</button></div>
+    <div class="adm-modal-body">
+      <div class="adm-form-row"><label>キャスト</label><select id="resCastSel" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)"><option value="">選択してください</option></select></div>
+      <div class="adm-form-row"><label>お客様名</label><input type="text" id="resCustomer" placeholder="例：田中様"></div>
+      <div class="adm-form-grid">
+        <div class="adm-form-row"><label>日付</label><input type="date" id="resDate"></div>
+        <div class="adm-form-row"><label>開始時間</label><input type="time" id="resStart"></div>
+      </div>
+      <div class="adm-form-row"><label>終了時間</label><input type="time" id="resEnd"></div>
+      <div class="adm-form-row"><label>コース</label><select id="resCourse" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)"><option value="基本90分">基本90分</option><option value="基本120分">基本120分</option><option value="基本150分">基本150分</option><option value="基本180分">基本180分</option><option value="お泊まり">お泊まり</option><option value="カップル90分">カップル90分</option><option value="カップル120分">カップル120分</option></select></div>
+      <div class="adm-form-row"><label>エリア</label><select id="resArea" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text)"><option value="東京">🟢 東京</option><option value="埼玉">🔵 埼玉</option><option value="群馬">🟡 群馬</option></select></div>
+      <div class="adm-form-row"><label>メモ</label><textarea id="resMemo" placeholder="場所・特記事項など" style="min-height:60px"></textarea></div>
+    </div>
+    <div class="adm-modal-foot"><button class="adm-btn adm-btn-ghost" onclick="closeReservationModal()">キャンセル</button><button class="adm-btn adm-btn-primary" onclick="saveReservation()">保存</button></div>
   </div>
 </div>
 <div class="adm-toast" id="admToast"></div>
@@ -712,7 +744,7 @@ window.addEventListener('hashchange',checkAdmin);
 checkAdmin();
 function checkPw(){const pw=document.getElementById('pwInput').value;if(pw===ADMIN_PW){document.getElementById('adminLogin').classList.remove('show');document.getElementById('adminPanel').classList.add('show');document.getElementById('site').style.display='none';updateStats();}else{document.getElementById('loginErr').style.display='block';document.getElementById('pwInput').value='';}}
 function closeAdmin(){document.getElementById('adminPanel').classList.remove('show');document.getElementById('site').style.display='block';window.location.hash='';}
-function admPage(id,el){document.querySelectorAll('.adm-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.adm-link').forEach(l=>l.classList.remove('active'));document.getElementById('adm-'+id).classList.add('active');el.classList.add('active');const titles={dashboard:'ダッシュボード',cast:'キャスト管理',diary:'写メ日記',ranking:'ランキング管理',review:'口コミ管理',availability:'空き・予約時間管理',shift:'シフト管理'};document.getElementById('admTitle').textContent=titles[id]||id;if(id==='cast')loadCasts();if(id==='diary')loadDiaries();if(id==='ranking'){loadRankList();loadRankSelect();}if(id==='review')loadReviewAdmin();if(id==='availability'){loadAvailCasts();}if(id==='shift'){shiftWeekOffset=0;loadShiftCasts();}if(id==='dashboard')updateStats();}
+function admPage(id,el){document.querySelectorAll('.adm-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.adm-link').forEach(l=>l.classList.remove('active'));document.getElementById('adm-'+id).classList.add('active');el.classList.add('active');const titles={dashboard:'ダッシュボード',cast:'キャスト管理',diary:'写メ日記',ranking:'ランキング管理',review:'口コミ管理',availability:'空き・予約時間管理',shift:'シフト管理',reservation:'予約管理'};document.getElementById('admTitle').textContent=titles[id]||id;if(id==='cast')loadCasts();if(id==='diary')loadDiaries();if(id==='ranking'){loadRankList();loadRankSelect();}if(id==='review')loadReviewAdmin();if(id==='availability'){loadAvailCasts();}if(id==='shift'){shiftWeekOffset=0;loadShiftCasts();}if(id==='reservation'){loadReservations();}if(id==='dashboard')updateStats();}
 async function updateStats(){const[{count:c1},{count:c2},{count:c3}]=await Promise.all([sb.from('casts').select('id',{count:'exact'}).eq('status','active'),sb.from('diaries').select('id',{count:'exact'}),sb.from('reviews').select('id',{count:'exact'}).eq('approved',true)]);document.getElementById('s-cast').textContent=c1||0;document.getElementById('s-diary').textContent=c2||0;document.getElementById('s-review').textContent=c3||0;}
 let editCastId=null,castPhotos=[],castTags=[];
 function fileToB64(f){return new Promise(r=>{const fr=new FileReader();fr.onload=e=>r({name:f.name,dataUrl:e.target.result});fr.readAsDataURL(f);})}
@@ -1022,9 +1054,28 @@ async function loadShiftCalendar() {
   renderShiftCalendar(startDate, castId);
 }
 
-function renderShiftCalendar(startDate, castId) {
+async function loadReservationsForShift(castId, startStr, endStr) {
+  const {data} = await sb.from('reservations').select('*')
+    .eq('cast_id', castId)
+    .gte('reservation_date', startStr)
+    .lte('reservation_date', endStr)
+    .neq('status', 'cancelled');
+  const map = {};
+  (data||[]).forEach(r => {
+    if (!map[r.reservation_date]) map[r.reservation_date] = [];
+    map[r.reservation_date].push(r);
+  });
+  return map;
+}
+
+async function renderShiftCalendar(startDate, castId) {
   const today = new Date();
   today.setHours(0,0,0,0);
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 13);
+  const startStr = startDate.toISOString().split('T')[0];
+  const endStr = endDate.toISOString().split('T')[0];
+  const resMap = await loadReservationsForShift(castId, startStr, endStr);
   const wrap = document.getElementById('shiftCalendarWrap');
   const days = ['日','月','火','水','木','金','土'];
   let html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px">';
@@ -1042,6 +1093,8 @@ function renderShiftCalendar(startDate, castId) {
     if (isPast) style+=';background:#f5f5f5;opacity:0.6';
     html+='<div style="'+style+'"><div style="font-weight:700;color:var(--navy);font-size:11px;margin-bottom:2px">'+d.getDate()+'</div>';
     dayShifts.forEach(s=>{html+='<div style="background:var(--mid);color:#fff;border-radius:4px;padding:2px 3px;margin-bottom:2px;font-size:9px;cursor:pointer;display:flex;justify-content:space-between;align-items:center" onclick="deleteShift(\'' + s.id + '\',\'' + castId + '\')">'+s.start_time+'〜'+s.end_time+' <span style="opacity:0.7">✕</span></div>';});
+    const dayRes = resMap[dateStr] || [];
+    dayRes.forEach(r=>{html+='<div style="background:#C62828;color:#fff;border-radius:4px;padding:2px 3px;margin-bottom:2px;font-size:9px;">'+r.start_time+'〜'+r.end_time+' 予約済</div>';});
     html+='</div>';
   }
   html+='</div><p style="font-size:11px;color:var(--muted);margin-top:8px">※ シフトをタップすると削除できます</p>';
@@ -1076,7 +1129,12 @@ async function renderCpShift(castId) {
   end.setDate(today.getDate()+10);
   const startStr = today.toISOString().split('T')[0];
   const endStr = end.toISOString().split('T')[0];
-  const {data} = await sb.from('shifts').select('*').eq('cast_id',castId).gte('shift_date',startStr).lte('shift_date',endStr).order('shift_date');
+  const [{data}, {data: resData}] = await Promise.all([
+    sb.from('shifts').select('*').eq('cast_id',castId).gte('shift_date',startStr).lte('shift_date',endStr).order('shift_date'),
+    sb.from('reservations').select('*').eq('cast_id',castId).gte('reservation_date',startStr).lte('reservation_date',endStr).neq('status','cancelled')
+  ]);
+  const resMap = {};
+  (resData||[]).forEach(r=>{if(!resMap[r.reservation_date])resMap[r.reservation_date]=[];resMap[r.reservation_date].push(r);});
   const shiftMap={};
   (data||[]).forEach(s=>{if(!shiftMap[s.shift_date])shiftMap[s.shift_date]=[];shiftMap[s.shift_date].push(s);});
   const days=['日','月','火','水','木','金','土'];
@@ -1098,10 +1156,139 @@ async function renderCpShift(castId) {
     html+='<div style="'+style+'"><div style="font-weight:700;color:var(--navy);font-size:11px;margin-bottom:2px">'+d.getDate()+'</div>';
     if(hasShift){dayShifts.forEach(s=>{html+='<div style="color:var(--mid);font-size:9px;line-height:1.4">'+s.start_time+'<br>〜'+s.end_time+'</div>';});}
     else{html+='<div style="color:#ccc;font-size:10px;margin-top:8px">−</div>';}
+    const dayRes=resMap[dateStr]||[];
+    dayRes.forEach(r=>{html+='<div style="background:#ffebee;color:#C62828;font-size:8px;border-radius:3px;padding:1px 3px;margin-top:1px">予約済</div>';});
     html+='</div>';
   }
   html+='</div>';
   return {html, hasAny: Object.keys(shiftMap).length>0};
+}
+
+
+// ===== 予約管理 =====
+let resFilter = 'all';
+let editResId = null;
+
+async function loadReservations() {
+  const el = document.getElementById('reservationList');
+  el.innerHTML = '<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">読み込み中...</p>';
+  const today = new Date().toISOString().split('T')[0];
+  let q = sb.from('reservations').select('*').order('reservation_date').order('start_time');
+  if (resFilter === 'today') q = q.eq('reservation_date', today);
+  if (resFilter === 'upcoming') q = q.gte('reservation_date', today);
+  if (resFilter === 'past') q = q.lt('reservation_date', today);
+  const {data} = await q;
+  if (!data || !data.length) {
+    el.innerHTML = '<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">予約がありません</p>';
+    return;
+  }
+  el.innerHTML = data.map(r => {
+    const dt = new Date(r.reservation_date + 'T00:00:00');
+    const ds = `${dt.getMonth()+1}/${dt.getDate()}(${['日','月','火','水','木','金','土'][dt.getDay()]})`;
+    const statusColor = r.status === 'confirmed' ? '#2E7D32' : r.status === 'cancelled' ? '#C62828' : '#E65100';
+    const statusLabel = r.status === 'confirmed' ? '確定' : r.status === 'cancelled' ? 'キャンセル' : '仮予約';
+    return `<div style="background:var(--frost);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy)">${ds} ${r.start_time}〜${r.end_time}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">${r.cast_name} / ${r.customer_name}</div>
+        </div>
+        <span style="font-size:11px;background:${statusColor}22;color:${statusColor};padding:3px 8px;border-radius:10px;font-weight:700">${statusLabel}</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">${r.course||''} ${r.area||''} ${r.memo?'/ '+r.memo:''}</div>
+      <div style="display:flex;gap:6px">
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" onclick="openReservationModal('${r.id}')">編集</button>
+        ${r.status!=='cancelled'?`<button class="adm-btn adm-btn-danger adm-btn-sm" onclick="cancelRes('${r.id}')">キャンセル</button>`:''}
+        <button class="adm-btn adm-btn-danger adm-btn-sm" onclick="deleteRes('${r.id}')">削除</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterRes(f, btn) {
+  resFilter = f;
+  document.querySelectorAll('#adm-reservation .adm-btn').forEach(b => {
+    b.className = b === btn ? 'adm-btn adm-btn-primary adm-btn-sm' : 'adm-btn adm-btn-ghost adm-btn-sm';
+  });
+  loadReservations();
+}
+
+async function openReservationModal(id) {
+  editResId = id || null;
+  const {data: casts} = await sb.from('casts').select('id,name').eq('status','active');
+  const sel = document.getElementById('resCastSel');
+  sel.innerHTML = '<option value="">選択してください</option>' + (casts||[]).map(c=>`<option value="${c.id}" data-name="${c.name}">${c.name}</option>`).join('');
+  
+  if (id) {
+    const {data: r} = await sb.from('reservations').select('*').eq('id', id).single();
+    if (r) {
+      document.getElementById('resMTitle').textContent = '予約を編集';
+      sel.value = r.cast_id;
+      document.getElementById('resCustomer').value = r.customer_name;
+      document.getElementById('resDate').value = r.reservation_date;
+      document.getElementById('resStart').value = r.start_time;
+      document.getElementById('resEnd').value = r.end_time;
+      document.getElementById('resCourse').value = r.course || '';
+      document.getElementById('resArea').value = r.area || '東京';
+      document.getElementById('resMemo').value = r.memo || '';
+    }
+  } else {
+    document.getElementById('resMTitle').textContent = '予約を追加';
+    document.getElementById('resCustomer').value = '';
+    document.getElementById('resDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('resStart').value = '';
+    document.getElementById('resEnd').value = '';
+    document.getElementById('resMemo').value = '';
+  }
+  document.getElementById('reservationModal').classList.add('open');
+}
+
+function closeReservationModal() {
+  document.getElementById('reservationModal').classList.remove('open');
+  editResId = null;
+}
+
+async function saveReservation() {
+  const castSel = document.getElementById('resCastSel');
+  const castId = castSel.value;
+  const castName = castSel.options[castSel.selectedIndex]?.getAttribute('data-name') || '';
+  const customer = document.getElementById('resCustomer').value.trim();
+  const date = document.getElementById('resDate').value;
+  const start = document.getElementById('resStart').value;
+  const end = document.getElementById('resEnd').value;
+  if (!castId || !customer || !date || !start || !end) {
+    admShowToast('必須項目を入力してください');return;
+  }
+  const data = {
+    cast_id: castId, cast_name: castName,
+    customer_name: customer,
+    reservation_date: date, start_time: start, end_time: end,
+    course: document.getElementById('resCourse').value,
+    area: document.getElementById('resArea').value,
+    memo: document.getElementById('resMemo').value.trim()
+  };
+  if (editResId) {
+    await sb.from('reservations').update(data).eq('id', editResId);
+  } else {
+    await sb.from('reservations').insert(data);
+  }
+  admShowToast('保存しました ✓');
+  closeReservationModal();
+  loadReservations();
+}
+
+async function cancelRes(id) {
+  if (!confirm('キャンセルしますか？')) return;
+  await sb.from('reservations').update({status: 'cancelled'}).eq('id', id);
+  admShowToast('キャンセルしました');
+  loadReservations();
+}
+
+async function deleteRes(id) {
+  if (!confirm('削除しますか？')) return;
+  await sb.from('reservations').delete().eq('id', id);
+  admShowToast('削除しました');
+  loadReservations();
 }
 
 </script>

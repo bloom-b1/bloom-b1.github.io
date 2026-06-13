@@ -1138,36 +1138,40 @@ async function renderCpShift(castId) {
   const shiftMap={};
   (data||[]).forEach(s=>{if(!shiftMap[s.shift_date])shiftMap[s.shift_date]=[];shiftMap[s.shift_date].push(s);});
   const days=['日','月','火','水','木','金','土'];
-  let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px">';
-  days.forEach(d=>{html+='<div style="text-align:center;font-size:10px;font-weight:700;color:var(--muted);padding:3px 0">'+d+'</div>';});
-  html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
-  const firstDay=today.getDay();
-  for(let i=0;i<firstDay;i++){html+='<div></div>';}
+  let html='<div style="display:flex;flex-direction:column;gap:8px">';
+  let hasAnyShift = false;
   for(let i=0;i<=10;i++){
     const d=new Date(today);
     d.setDate(today.getDate()+i);
     const dateStr=d.toISOString().split('T')[0];
     const isToday=i===0;
     const dayShifts=shiftMap[dateStr]||[];
-    const hasShift=dayShifts.length>0;
-    let style='border:1px solid var(--border);border-radius:6px;padding:4px 3px;min-height:52px;background:#fff;font-size:10px;text-align:center';
-    if(isToday)style+=';border-color:var(--accent);background:rgba(91,158,201,0.08)';
-    if(hasShift)style+=';background:rgba(46,111,163,0.08);border-color:var(--mid)';
-    html+='<div style="'+style+'"><div style="font-weight:700;color:var(--navy);font-size:11px;margin-bottom:2px">'+d.getDate()+'</div>';
-    if(hasShift){dayShifts.forEach(s=>{html+='<div style="color:var(--mid);font-size:9px;line-height:1.4">'+s.start_time+'<br>〜'+s.end_time+'</div>';});}
-    else{html+='<div style="color:#ccc;font-size:10px;margin-top:8px">−</div>';}
     const dayRes=resMap[dateStr]||[];
-    dayRes.forEach(r=>{html+='<div style="background:#ffebee;color:#C62828;font-size:8px;border-radius:3px;padding:1px 3px;margin-top:1px">予約済</div>';});
-    html+='</div>';
+    if(!dayShifts.length && !dayRes.length) continue;
+    hasAnyShift = true;
+    const dayLabel=(d.getMonth()+1)+'月'+d.getDate()+'日('+days[d.getDay()]+')';
+    html+='<div style="border:'+(isToday?'2px solid var(--accent)':'1px solid var(--border)')+';border-radius:10px;overflow:hidden">';
+    html+='<div style="background:'+(isToday?'var(--accent)':'var(--navy)')+';color:#fff;padding:8px 14px;font-size:13px;font-weight:700">'+dayLabel+'</div>';
+    html+='<div style="padding:8px 14px;background:#fff">';
+    dayShifts.forEach(s=>{
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)">';
+      html+='<span style="font-size:16px">🟢</span>';
+      html+='<span style="font-size:13px;font-weight:700;color:var(--navy)">'+s.start_time+' 〜 '+s.end_time+'</span>';
+      html+='<span style="font-size:11px;color:var(--muted)">受付中</span>';
+      html+='</div>';
+    });
+    dayRes.forEach(r=>{
+      html+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)">';
+      html+='<span style="font-size:16px">🔴</span>';
+      html+='<span style="font-size:13px;font-weight:700;color:#C62828">'+r.start_time+' 〜 '+r.end_time+'</span>';
+      html+='<span style="font-size:11px;color:#C62828">予約済み</span>';
+      html+='</div>';
+    });
+    html+='</div></div>';
   }
-  html+='</div>';
-  return {html, hasAny: Object.keys(shiftMap).length>0};
-}
-
-
-// ===== 予約管理 =====
-let resFilter = 'all';
-let editResId = null;
+  if(!hasAnyShift){html='<p style="text-align:center;font-size:13px;color:var(--muted);padding:20px 0">現在スケジュールが登録されていません</p>';}
+  else{html+='</div>';}
+  return {html, hasAny: hasAnyShift};
 
 async function loadReservations() {
   const el = document.getElementById('reservationList');
